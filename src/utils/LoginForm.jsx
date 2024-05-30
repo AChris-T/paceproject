@@ -65,7 +65,6 @@ const Login = () => {
       <label className="text-[#f2f2f2] font-bold text-[16px] text-start">Phone number</label>
       <input
       name="phoneNumberOrUsername"
-       placeholder="phoneNumber"
        value={state.phoneNumberOrUsername}
        onChange={handleIputChange}
        className="bg-transparent border-b-2 font-normal outline-none text-[#FFFFFF]"/>
@@ -75,7 +74,6 @@ const Login = () => {
       <input
       name="password"
       type="password"
-      placeholder="password"
       value={state.password}
       onChange={handleIputChange} 
       className="bg-transparent border-b-2 outline-none font-normal text-[#FFFFFF]"/>
