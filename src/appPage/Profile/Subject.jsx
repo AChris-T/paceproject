@@ -50,13 +50,25 @@ const Subject = ({ prevStep, handleChange, values, subjects, submitForm }) => {
           <p>No subjects available.</p>
         )}
       </div>
-      <button 
+      <div className='relative mt-[28px] cursor-pointer'>
+            <button 
+              disabled={selectedSubjects.length === 0}
+              type="submit" 
+              className={`absolute  text-[18px] font-bold flex  items-center w-full justify-center gap-2 ${selectedSubjects.length === 0 ?'bg-[#F2F2F2] text-[#A9AEB8]': 'bg-[#16956C] text-white' } rounded-[50px] px-[20px] py-[10px]`}
+               >
+               {
+                selectedSubjects.length === 0 ? "continue" : "Done"
+               }
+            </button>
+            <div  className={`z-20 ${selectedSubjects.length === 0 ?'bg-gray-200': 'bg-green-Primary_2 text-[#A9AEB8]' } mt-[5px]  rounded-[50px] w-full h-[50px] `}> </div>
+        </div>
+     {/*  <button 
         type="submit" 
-        className={`border flex items-center gap-2 ${selectedSubjects ? 'bg-[#16956C] text-white' : 'bg-gray-200'} rounded-[50px] px-[20px] py-[10px]`}
+        className={`border text-[px2rem(18)] font-bold flex mt-5 items-center justify-center gap-2 ${selectedSubjects ? 'bg-[#16956C] text-white' : 'bg-gray-200'} rounded-[px2rem(50)] px-[px2rem(20)] py-[px2rem(10)]`}
         disabled={selectedSubjects.length === 0}
           >
-          Submit
-        </button>
+          Done
+        </button> */}
     </div>
     </form>
   );
