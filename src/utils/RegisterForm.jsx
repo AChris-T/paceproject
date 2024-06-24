@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import FacebookSign from "../components/Icons/FacebookSign"
 import Google from "../components/Icons/Google"
 import { useState } from "react"
-import authService from "./authService"
+import authService from "./auth/authService"
 import { ToastContainer, toast } from "react-toastify"
 import { PacmanLoader } from "react-spinners"
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,7 +28,7 @@ const Register = () => {
   }
 
   const validatePhoneNumber =(phoneNumber)=>{
-    const phoneRegax = /^\d{10}$/;
+    const phoneRegax = /^\d{11}$/;
     return phoneRegax.test(phoneNumber)
   }
   const validateUsername = (username) => {
@@ -48,7 +48,6 @@ const Register = () => {
       toast.error("Invalid phone number. Please enter a valid 10-digit number.");
       return;
     }
-    
     if (state.password !== state.confirmPassword) {
       toast.error("Passwords do not match. Please check and try again.");
       return;
@@ -64,14 +63,15 @@ const Register = () => {
       .then(
         ()=>{
           setState((prevState)=>({...prevState,loading:false}));
-          navigate("/login")
+          navigate("/profile_Creation")
+          toast.success("Registration successfull");
         },
         (error)=>{
           setState((prevState)=>({
             ...prevState,
             loading:false,
           }))
-          .toast.error("Invalid User Details")
+          toast.error(error.response.data.message || "Invalid User Details");
         }
       )
     }
@@ -80,7 +80,7 @@ const Register = () => {
           ...prevState,
           loading:false,
         }))
-        toast.error("An unexpected error occurred Please check your Network.");
+        toast.error(err.response?.data?.message || "An unexpected error occurred. Please check your network.");
 
     }
   }
@@ -88,7 +88,6 @@ const Register = () => {
   return (
     <div className="flex flex-col gap-8 bg-green-Primary_1 rounded-t-[40px]  px-8 py-8 ">
         <ToastContainer />
-
       <form onSubmit={handleSignUp} className="flex flex-col gap-5">
       <div className="flex flex-col gap-3">
       <label className="text-[#f2f2f2] text-start font-bold text-[16px]">Username</label>

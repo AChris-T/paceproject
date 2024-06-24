@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://pace-app-j2bo.onrender.com/api/v1/users/";
 
+
 const signUp = async (phoneNumber,username,password,confirmPassword) =>{
     const response = await axios
         .post(API_URL + "/signup", {
@@ -35,6 +36,7 @@ const logout = () =>{
 const getCurrentUser = ()=>{
     return JSON.stringify(localStorage.getItem("user"))
 }
+
 
 const authService = {
     signIn,

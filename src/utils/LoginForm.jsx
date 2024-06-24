@@ -2,14 +2,14 @@ import { NavLink, useNavigate } from "react-router-dom"
 import FacebookSign from "../components/Icons/FacebookSign"
 import Google from "../components/Icons/Google"
 import { useState } from "react"
-import authService from "./authService"
+import authService from "./auth/authService"
 import { PacmanLoader} from "react-spinners"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
-  const [ state, setState] = useState({
+  const [ state, setState] = useState({ 
     phoneNumberOrUsername:"",
     password:"",
     loading:false,
@@ -35,6 +35,7 @@ const Login = () => {
         ()=>{
           setState((prevState) => ({ ...prevState, loading: false }));
           navigate("/app");
+          toast.error("Welcome");
           window.location.reload();
         },
         (error)=>{
@@ -42,19 +43,20 @@ const Login = () => {
             ...prevState,
             loading:false,
           }))
-            toast.error("Invalid User Details ");
-       
+          toast.error(error.response.data.message || "Invalid User Details");
         }
-      );
+      )
     }
-      catch(err){
-        setState((prevState) => ({
-          ...prevState,
-          loading: false,
-        }));
-        toast.error("An unexpected error occurred Please check your Network.");
-      }
+    catch(err){
+      setState((prevState)=>({
+        ...prevState,
+        loading:false,
+      }))
+      toast.error(err.response?.data?.message || "An unexpected error occurred. Please check your network.");
+
   }
+}
+
 
   return (
     <>
