@@ -67,6 +67,7 @@ const Profile = ({nextStep, handleChange, values}) => {
             <label className='text-[16px] text-[#4f4f4f] '>Date of birth</label>
                 <input
                 value={values.dateOfBirth}
+                type='date'
                 onChange={handleChange('dateOfBirth')}
                  id="birthday"
                   name="birthday"
