@@ -7,7 +7,7 @@ const UtilLayout = () => {
     <div className="px-8 py-8">
         <h3 className="text-[15.78px] font-normal text-[#4b4d52] text-start">Welcome</h3>
         <div className="flex items-center justify-between">
-            <NavLink to='/' className="text-[28.05px] font-normal text-[#30E0A8]"
+            <NavLink to='/login' className="text-[28.05px] font-normal text-[#30E0A8]"
             style={({isActive})=>{
                 return{
                   color:isActive?"#16956C":"",

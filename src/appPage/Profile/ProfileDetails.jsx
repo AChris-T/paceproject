@@ -5,11 +5,23 @@ import Department from './Department';
 import Profile from "./Profile"
 import Subject from './Subject';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import authService from '../../utils/auth/authService';
 
 const ProfileDetails = () => {
+    const navigate = useNavigate()
+    const currentUser = authService.getCurrentUser();
+
+    useEffect(()=>{
+      if(!currentUser || currentUser.profileCompleted){
+        navigate("/home")
+      }
+    },[currentUser,navigate])
+
     const [step,setStep] = useState(1);
     const [ formData,setFormData] = useState({
         firstName: "",
+        lastName:"",
         email:"",
         gender:"",
         department:"",
@@ -25,8 +37,7 @@ const ProfileDetails = () => {
         try {
           const response = await profileService.fetchSubjects();
           const { subjects } = response.data; // Adjust according to the actual response structure
-          setSubjects(subjects);
-          
+          setSubjects(subjects);        
       } catch (error) {
           toast.error('Error fetching subjects: ' + (error.response?.data?.message || error.message));
       }
@@ -56,7 +67,13 @@ const ProfileDetails = () => {
         try {
           console.log('Submitting data:', data);
           await profileService.saveProfile(data, token);
+          const updatedUser ={
+            ...currentUser,
+            profileCompleted:true
+          }
+          localStorage.setItem("user", JSON.stringify(updatedUser)); 
           toast.success("Profile updated successfully!");
+          navigate("/app")
         } 
         catch (error) {
           console.error('Error submitting profile:', error);

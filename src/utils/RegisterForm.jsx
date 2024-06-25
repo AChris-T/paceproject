@@ -63,7 +63,7 @@ const Register = () => {
       .then(
         ()=>{
           setState((prevState)=>({...prevState,loading:false}));
-          navigate("/profile_Creation")
+          navigate("/profile")
           toast.success("Registration successfull");
         },
         (error)=>{

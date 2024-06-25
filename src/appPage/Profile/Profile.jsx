@@ -24,11 +24,22 @@ const Profile = ({nextStep, handleChange, values}) => {
         </div>
         <div className='flex flex-col mt-[27px] gap-[14px]'>
           <div className='flex flex-col w-full'>
-            <label className='text-[16px] font-normal text-[#4f4f4f] '>Full Name</label>
+            <label className='text-[16px] font-normal text-[#4f4f4f] '>Surname</label>
             <input
             required             
             value={values.firstName}
             onChange={handleChange("firstName")}
+            className='h-[31px] border-b 
+            border-b-[#BDBDBD] bg-transparent 
+            outline-none text-[16px] font-bold'
+            />
+          </div>
+          <div className='flex flex-col w-full'>
+            <label className='text-[16px] font-normal text-[#4f4f4f] '>First Name</label>
+            <input
+            required             
+            value={values.lastName}
+            onChange={handleChange("lastName")}
             className='h-[31px] border-b 
             border-b-[#BDBDBD] bg-transparent 
             outline-none text-[16px] font-bold'

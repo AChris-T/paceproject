@@ -30,12 +30,11 @@ const Login = () => {
     e.preventDefault();
     setState((prevState)=>({...prevState,loading:true}))
     try{
-      await authService.signIn(state.phoneNumberOrUsername,state.password)
+     const response = await authService.signIn(state.phoneNumberOrUsername,state.password)
       .then(
         ()=>{
           setState((prevState) => ({ ...prevState, loading: false }));
-          navigate("/app");
-          toast.error("Welcome");
+          toast.success("Welcome");
           window.location.reload();
         },
         (error)=>{
