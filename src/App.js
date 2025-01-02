@@ -10,6 +10,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Profile from './page/Profile';
 import ProtectedRoute from './constants/ProtectedRoute';
+import ResetPassword from './utils/ResetPassword';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/reset_password" element={<ResetPassword />} />
         <Route
           path="/profile-creation"
           element={

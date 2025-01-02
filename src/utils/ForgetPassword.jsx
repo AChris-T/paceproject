@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useResetPasswordMutation } from '../redux/api/Auth';
+import { useForgetPasswordMutation } from '../redux/api/Auth';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import { enqueueSnackbar } from 'notistack';
 import Cookies from 'js-cookie';
 
 const ForgetPassword = () => {
-  const [forgetPassword, { isLoading }] = useResetPasswordMutation();
+  const [forgetPassword, { isLoading }] = useForgetPasswordMutation();
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -26,8 +26,9 @@ const ForgetPassword = () => {
       try {
         const data = await forgetPassword(values).unwrap();
         console.log('Login successful:', data.message);
+        localStorage.setItem('OTP', data.data);
         Cookies.set('authToken', JSON.stringify(data), { expires: 2 }); // `expires: 2` means 2 hours
-        navigate('/profile-creation');
+        navigate('/reset_password');
         enqueueSnackbar(data.message, { variant: 'success' });
       } catch (error) {
         setFieldError('username', error.data.message);
@@ -47,24 +48,25 @@ const ForgetPassword = () => {
       <div className="flex flex-col gap-8 bg-green-Primary_1 rounded-t-[40px] h-[85vh] px-8 py-8 ">
         <div className="flex flex-col gap-3">
           <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3">
-            <label className="text-[#f2f2f2] font-bold text-[16px]">
-              Phone number
-            </label>
-            <input
-              name="username"
-              type="username"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-              className="bg-transparent
-          border-b-[1px] font-normal outline-none
-         text-[#FFFFFF]"
-            />
-            {formik.touched.username && formik.errors.username ? (
-              <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
-                {formik.errors.username}
-              </div>
-            ) : null}{' '}
+            <div className="flex flex-col gap-3">
+              <label className="text-[#f2f2f2] font-medium text-[16px] text-start">
+                Phone Number
+              </label>
+              <input
+                name="username"
+                type="username"
+                id="username"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+                className="bg-transparent border-b-[1px] focus:bg-none font-normal outline-none text-[#FFFFFF]"
+              />
+              {formik.touched.username && formik.errors.username ? (
+                <div className="text-red-600 text-end -mt-3 text-[12px] popins font-normal">
+                  {formik.errors.username}
+                </div>
+              ) : null}
+            </div>
             <NavLink
               to="/register"
               className="flex justify-center items-center w-full font-semibold text-[#f9f9f9] text-[12px] italic"
@@ -76,7 +78,7 @@ const ForgetPassword = () => {
                 type="submit"
                 className="absolute  bg-white rounded-[50px] w-full h-[50px] flex justify-center items-center text-green-Primary_1 font-bold leading-[31.2px] text-[18px]"
               >
-                Reset Password
+                {isLoading ? 'Wait' : 'Reset Password'}
               </button>
               <div className="z-20 mt-[5px] bg-green-Primary_2 rounded-[50px] w-full h-[50px]">
                 {' '}
