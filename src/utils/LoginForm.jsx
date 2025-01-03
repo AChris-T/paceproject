@@ -1,10 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import FacebookSign from '../components/Icons/FacebookSign';
 import Google from '../components/Icons/Google';
-import { useState } from 'react';
-import { PacmanLoader } from 'react-spinners';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
@@ -31,11 +27,15 @@ const Login = () => {
         const data = await login(values).unwrap();
         console.log('Login successful:', data);
         enqueueSnackbar('Login successful!', { variant: 'success' });
-        Cookies.set('authToken', JSON.stringify(data), { expires: 2 });
-        if (!data.isProfileComplete) {
+        Cookies.set('User', JSON.stringify(data), { expires: 2 });
+        Cookies.set('UserDetails', data.data, { expires: 2 });
+        Cookies.set('authToken', data.data.token, {
+          expires: 2,
+        });
+        if (!data?.data?.isProfileComplete) {
           navigate('/profile-creation');
         } else {
-          navigate('/');
+          navigate('/app');
         }
       } catch (error) {
         console.error('Login failed:', error);
@@ -50,7 +50,6 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="flex flex-col gap-5 bg-green-Primary_1 rounded-t-[40px] h-[80vh] px-8 py-8 ">
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">

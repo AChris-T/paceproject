@@ -11,12 +11,28 @@ body {
   font-size: 1rem;
   overflow-x: hidden;
 }
+.newbg{
+  background-image: url('./assets/PaceAppLogo/Subtract.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: top;
+}
+.new{
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+}
+.newbgn{
+  background-image: url('./assets/PaceAppLogo/Subtr.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-position-y: top;
+}
 .myFont{
   font-family: 'Coolvetica', sans-serif;
 
 }
+.fontFace {
 
-@font-face {
   font-family: "proxima_nova_rgregular";
   src: url("https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot");
   src: url("https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot?#iefix")
@@ -30,7 +46,7 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
+.nova {
   font-family: "proxima_nova_rgbold";
   src: url("https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot");
   src: url("https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot?#iefix")

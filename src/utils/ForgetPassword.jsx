@@ -1,8 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useForgetPasswordMutation } from '../redux/api/Auth';
 import { useFormik } from 'formik';
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import * as Yup from 'yup';
 import 'react-toastify/dist/ReactToastify.css';
 import { enqueueSnackbar } from 'notistack';

@@ -59,7 +59,7 @@ const Register = () => {
     },
   });
   return (
-    <div className="flex flex-col gap-8 bg-green-Primary_1 rounded-t-[40px] h-[80vh] md:h-full px-8 py-8 ">
+    <div className="flex flex-col gap-8 bg-green-Primary_1 rounded-t-[40px] h-[100vh] md:h-full px-8 py-8 ">
       <ToastContainer />
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
         <div className="flex flex-col gap-3">

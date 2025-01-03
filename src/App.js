@@ -11,14 +11,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import Profile from './page/Profile';
 import ProtectedRoute from './constants/ProtectedRoute';
 import ResetPassword from './utils/ResetPassword';
+import Home from './page/QuestionPage/Home';
+import HomeLayout from './page/QuestionPage/HomeLayout';
+import LeaderBoard from './page/QuestionPage/LeaderBoard';
+import Notification from './page/QuestionPage/Notification';
+import ProfileDetails from './page/QuestionPage/Profile';
 
 function App() {
   return (
-    <div className="App">
+    <div className="max-w-[740px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<UtilLayout />}>
-          <Route path="/" element={<Navigate to="/app" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
@@ -32,6 +36,19 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/app"
+          element={
+            <ProtectedRoute>
+              <HomeLayout />{' '}
+            </ProtectedRoute>
+          }
+        >
+          <Route path="home" element={<Home />} />
+          <Route path="leader" element={<LeaderBoard />} />
+          <Route path="notification" element={<Notification />} />
+          <Route path="profile" element={<ProfileDetails />} />
+        </Route>
       </Routes>
     </div>
   );

@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import API_BASE_URL from '../../constants/Api';
+import Cookies from 'js-cookie';
 
 export const Auth = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().token;
-
+      const token = Cookies.get('authToken');
+      console.log(token);
       headers.set('Content-Type', 'application/json');
       headers.set('Accept', 'application/json');
 
@@ -55,6 +56,13 @@ export const Auth = createApi({
         body,
       }),
     }),
+    proilfeCreation: builder.mutation({
+      query: (body) => ({
+        url: 'student/complete-profile',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -64,4 +72,5 @@ export const {
   useRegisterUserMutation,
   useForgetPasswordMutation,
   useResetPasswordMutation,
+  useProilfeCreationMutation,
 } = Auth;
