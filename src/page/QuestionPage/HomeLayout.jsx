@@ -17,7 +17,7 @@ export default function HomeLayout() {
       <div className="flex bg-white h-[70px] justify-between shadow-2xl  items-center px-[6px]">
         <NavLink
           to="home"
-          className={`text-[2px] flex gap-3 rounded-full items-center px-[24px] py-[7px] font-normal  ${
+          className={`text-[12px] flex gap-3 rounded-full items-center px-[24px] py-[7px] font-normal  ${
             pathname === '/app/home' ? 'text-[#30E0A8] bg-[#21A279]' : ''
           }`}
           style={({ isActive }) => {

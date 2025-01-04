@@ -39,11 +39,11 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-[#167E95] flex gap-5 items-center md:py-[16px] h-[60px] tracking-wide  text-white mt-[15px] rounded-[10px] px-[29px]  newbgn">
+      <div className="bg-[#167E95] flex gap-5 items-center md:py-[16px] py-[22px] tracking-wide  text-white mt-[15px] rounded-[10px] px-[29px]  newbgn">
         <PrcaticeIcon />
         <h2>PRATICE NOW</h2>
       </div>
-      <div className="bg-white border-[#E1E4EB] border-[1px] flex gap-5 items-center md:py-[16px] h-[60px] tracking-wide   mt-[15px] rounded-[10px] px-[29px]  ">
+      <div className="bg-white border-[#E1E4EB] border-[1px] flex gap-5 items-center md:py-[16px] py-[22px] tracking-wide   mt-[15px] rounded-[10px] px-[29px]  ">
         <ReferIcon />
         <h2 className="text-[#167E95]">Refer your friends</h2>
       </div>
