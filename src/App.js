@@ -18,12 +18,19 @@ import Notification from './page/QuestionPage/Notification';
 import ProfileDetails from './page/QuestionPage/Profile';
 
 function App() {
+  const [allowProfileCreation, setAllowProfileCreation] = useState(false);
+
   return (
     <div className="max-w-[740px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<UtilLayout />}>
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <Login setAllowProfileCreation={setAllowProfileCreation} />
+            }
+          />
           <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/forget-password" element={<ForgetPassword />} />
@@ -31,7 +38,7 @@ function App() {
         <Route
           path="/profile-creation"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowProfileCreation={allowProfileCreation}>
               <Profile />{' '}
             </ProtectedRoute>
           }

@@ -7,11 +7,14 @@ import Cookies from 'js-cookie';
 import user from '../../assets/PaceAppLogo/userd.jpg';
 import API_BASE_URL from '../../constants/Api';
 import { FaMinus } from 'react-icons/fa';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileDetails({ onNext }) {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null); // To store image URL
   const [imagePreview, setImagePreview] = useState(null); // To store image preview
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -27,14 +30,79 @@ export default function ProfileDetails({ onNext }) {
     },
     validate: (values) => {
       const errors = {};
-      // Adjust validation for the nested structure
-      if (!values.personalDetails.firstName) errors.firstName = 'Required';
-      if (!values.personalDetails.lastName) errors.lastName = 'Required';
-      if (!values.personalDetails.email) errors.email = 'Required';
-      if (!values.personalDetails.gender) errors.gender = 'Required';
-      if (!values.personalDetails.dateOfBirth) errors.dateOfBirth = 'Required';
-      if (!values.personalDetails.levelOfStudy)
-        errors.levelOfStudy = 'Required';
+
+      // Validate firstName
+      if (!values.personalDetails.firstName) {
+        errors.firstName = 'First name is required';
+      } else if (values.personalDetails.firstName.length < 2) {
+        errors.firstName = 'First name must be at least 2 characters';
+      } else if (!/^[A-Za-z]+$/.test(values.personalDetails.firstName)) {
+        errors.firstName = 'First name must only contain letters';
+      }
+
+      // Validate lastName
+      if (!values.personalDetails.lastName) {
+        errors.lastName = 'Last name is required';
+      } else if (values.personalDetails.lastName.length < 2) {
+        errors.lastName = 'Last name must be at least 2 characters';
+      } else if (!/^[A-Za-z]+$/.test(values.personalDetails.lastName)) {
+        errors.lastName = 'Last name must only contain letters';
+      }
+
+      // Validate email
+      if (!values.personalDetails.email) {
+        errors.email = 'Email is required';
+      } else if (
+        !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(
+          values.personalDetails.email
+        )
+      ) {
+        errors.email = 'Invalid email address';
+      }
+
+      // Validate gender
+      if (!values.personalDetails.gender) {
+        errors.gender = 'Gender is required';
+      } else if (
+        !['Male', 'Female', 'Non-Binary', 'Other'].includes(
+          values.personalDetails.gender
+        )
+      ) {
+        errors.gender = 'Invalid gender selection';
+      }
+
+      // Validate dateOfBirth
+      if (!values.personalDetails.dateOfBirth) {
+        errors.dateOfBirth = 'Date of birth is required';
+      } else {
+        const today = new Date();
+        const birthDate = new Date(values.personalDetails.dateOfBirth);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (
+          monthDifference < 0 ||
+          (monthDifference === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+        if (age < 16) {
+          errors.dateOfBirth = 'You must be at least 18 years old';
+        }
+      }
+
+      // Validate levelOfStudy
+      if (
+        !values.personalDetails.levelOfStudy ||
+        values.personalDetails.levelOfStudy === ''
+      ) {
+        errors.levelOfStudy = 'Level of Study is required';
+      }
+
+      // Validate image
+      if (!values.personalDetails.image) {
+        errors.image = 'Profile image is required';
+      }
+
       return errors;
     },
     onSubmit: (values) => {
@@ -76,11 +144,16 @@ export default function ProfileDetails({ onNext }) {
         setImage(imageUrl); // Set image URL for preview
         setImagePreview(URL.createObjectURL(file)); // Preview image locally
         console.log('Image uploaded successfully:', imageUrl);
+        enqueueSnackbar('Image uploaded', { variant: 'success' });
       } catch (error) {
         console.error(
           'Image upload failed:',
           error.response?.data || error.message
         );
+        enqueueSnackbar('image upload failed', { variant: 'error' });
+        if (error.response?.status === 403) {
+          navigate('/login');
+        }
         alert('Image upload failed. Please try again.');
       }
     } else {
@@ -153,16 +226,22 @@ export default function ProfileDetails({ onNext }) {
                   className="mt-3 w-[85px] border-dashed border-gray-900 border-[1px] p-1 h-[85px] rounded-full"
                 />
               )}
+              {formik.errors.image && (
+                <div className="flex justify-end text-red-500">
+                  {formik.errors.image}
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="mt-[27px]">
+          <div className="mt-[27px] flex flex-col gap-3">
             <label>First Name</label>
             <input
               name="personalDetails.firstName"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.firstName}
-              className="w-full focus:outline-none border-b-[2px]"
+              className="w-full focus:outline-none border-b-[2px] text-gray-700"
+              placeholder="Enter your First Name"
             />
             {formik.errors.firstName && (
               <div className="flex justify-end text-red-500">
@@ -170,13 +249,14 @@ export default function ProfileDetails({ onNext }) {
               </div>
             )}
           </div>
-          <div className="mt-[27px]">
+          <div className="mt-4 flex flex-col gap-3">
             <label>Last Name</label>
             <input
               name="personalDetails.lastName"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.lastName}
-              className="w-full focus:outline-none border-b-[2px]"
+              className="w-full focus:outline-none border-b-[2px] text-gray-700"
+              placeholder="Enter your Last name"
             />
             {formik.errors.lastName && (
               <div className="flex justify-end text-red-500">
@@ -184,13 +264,15 @@ export default function ProfileDetails({ onNext }) {
               </div>
             )}
           </div>
-          <div className="mt-[27px]">
+          <div className="mt-4 flex flex-col gap-3">
             <label>E-mail</label>
             <input
+              type="email"
               name="personalDetails.email"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.email}
-              className="w-full focus:outline-none border-b-[2px]"
+              className="w-full focus:outline-none border-b-[2px] text-gray-700"
+              placeholder="Enter your Email"
             />
             {formik.errors.email && (
               <div className="flex justify-end text-red-500">
@@ -198,28 +280,34 @@ export default function ProfileDetails({ onNext }) {
               </div>
             )}
           </div>
-          <div className="mt-[27px]">
+          <div className="mt-4 flex flex-col gap-3">
             <label>Gender</label>
-            <input
+            <select
               name="personalDetails.gender"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.gender}
-              className="w-full focus:outline-none border-b-[2px]"
-            />
+              className="w-full focus:outline-none border-b-[2px] text-gray-700"
+            >
+              <option value="">select your Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Non-Binary">Non-Binary</option>
+              <option value="Other">Other</option>
+            </select>
             {formik.errors.gender && (
               <div className="flex justify-end text-red-500">
                 {formik.errors.gender}
               </div>
             )}
           </div>
-          <div className="mt-[27px]">
+          <div className="mt-4 flex flex-col gap-3">
             <label>Date of Birth</label>
             <input
               type="date"
               name="personalDetails.dateOfBirth"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.dateOfBirth}
-              className="w-full focus:outline-none border-b-[2px]"
+              className="w-full focus:outline-none border-b-[2px] text-gray-700"
             />
             {formik.errors.dateOfBirth && (
               <div className="flex justify-end text-red-500">
@@ -227,14 +315,21 @@ export default function ProfileDetails({ onNext }) {
               </div>
             )}
           </div>
-          <div className="mt-[27px]">
+          <div className="mt-4 flex flex-col gap-3">
             <label>Level of Study</label>
-            <input
+            <select
               name="personalDetails.levelOfStudy"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.levelOfStudy}
-              className="w-full focus:outline-none border-b-[2px]"
-            />
+              className="w-full focus:outline-none border-b-[2px] text-gray-700"
+            >
+              <option value="" className="text-gray-400">
+                Choose your level
+              </option>
+              <option value="A-Level">A'Level</option>
+              <option value="UTME">UTME</option>
+              <option value="JAMB">JAMB</option>
+            </select>
             {formik.errors.levelOfStudy && (
               <div className="flex justify-end text-red-500">
                 {formik.errors.levelOfStudy}

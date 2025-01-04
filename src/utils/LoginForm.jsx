@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { useLoginMutation } from '../redux/api/Auth';
 import Cookies from 'js-cookie';
 
-const Login = () => {
+const Login = ({ setAllowProfileCreation }) => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -34,6 +34,7 @@ const Login = () => {
         });
         if (!data?.data?.isProfileComplete) {
           navigate('/profile-creation');
+          setAllowProfileCreation(true);
         } else {
           navigate('/app/home');
         }
