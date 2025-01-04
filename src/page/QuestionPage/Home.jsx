@@ -11,7 +11,7 @@ export default function Home() {
   const firstName = parsedUserDetails?.data?.username;
   console.log(firstName);
   return (
-    <div className="px-[37px] py-[43px] flex flex-col h-[88vh] scrollbar-none new   overflow-y-scroll">
+    <div className="px-[17px] py-[43px] flex flex-col h-[88vh] scrollbar-none new   overflow-y-scroll">
       <h3 className="text-[36px] text-[#16956C] myFont">Hi,{firstName}</h3>
       <h3 className="text-[20px]  font-medium text-[#4B4D52]">
         Next Live Quiz

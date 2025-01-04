@@ -35,7 +35,7 @@ const Login = () => {
         if (!data?.data?.isProfileComplete) {
           navigate('/profile-creation');
         } else {
-          navigate('/app');
+          navigate('/app/home');
         }
       } catch (error) {
         console.error('Login failed:', error);

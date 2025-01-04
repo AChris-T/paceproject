@@ -44,7 +44,7 @@ export default function Profile() {
         ...formData.subjects,
       }).unwrap();
       enqueueSnackbar('Profile created successfully!', { variant: 'success' });
-      navigate('/app');
+      navigate('/app/home');
     } catch (error) {
       console.error('Failed to create profile:', error);
       enqueueSnackbar(error, { variant: error });
