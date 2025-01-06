@@ -35,6 +35,10 @@ const Register = () => {
       password: Yup.string()
         .min(6, 'Password must be at least 6 characters')
         .max(20, 'Password must not exceed 20 characters')
+        .matches(
+          /^[a-zA-Z0-9!@#$%^&*]*$/,
+          'Password can only contain alphanumeric characters and optional special characters like !@#$%^&*'
+        )
         .required('Password is required'),
 
       confirmPassword: Yup.string()
@@ -83,9 +87,7 @@ const Register = () => {
           ) : null}
         </div>
         <div className="flex flex-col gap-3">
-          <label
-            className="text-[#f2f2f2] text-start  font-medium text-[16px]"
-          >
+          <label className="text-[#f2f2f2] text-start  font-medium text-[16px]">
             Phone number
           </label>
           <input
