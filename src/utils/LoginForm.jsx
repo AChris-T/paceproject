@@ -42,7 +42,6 @@ const Login = ({ setAllowProfileCreation }) => {
         console.error('Login failed:', error);
         enqueueSnackbar('invalid credentials', { variant: 'error' });
 
-        setFieldError('username', 'Invalid username ');
       } finally {
         setSubmitting(false);
       }
