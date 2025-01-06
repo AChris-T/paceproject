@@ -32,26 +32,34 @@ export default function Profile() {
       alert('Department details are missing.');
       return;
     }
-    if (!formData.subjects) {
-      alert('Subjects are missing.');
+    if (!formData.subjectsOfInterest) {
+      console.log('Subjects are missing.');
       return;
     }
 
-    try {
-      await profileCreation({
-        ...formData.personalDetails,
-        ...formData.department,
-        ...formData.subjects,
-      }).unwrap();
-      enqueueSnackbar('Profile created successfully!', { variant: 'success' });
-      navigate('/app/home');
-    } catch (error) {
-      console.error('Failed to create profile:', error);
-      enqueueSnackbar(error, { variant: error });
-      setStep(1);
+    if (step === 3) {
+      try {
+        await profileCreation({
+          ...formData.personalDetails,
+          ...formData.department,
+          ...formData.subjectsOfInterest,
+        }).unwrap();
+        enqueueSnackbar('Profile created successfully!', {
+          variant: 'success',
+        });
+        navigate('/app/home');
+        // Navigate to Step 4 after successful submission
+      } catch (error) {
+        console.error('Failed to create profile:', error);
+        enqueueSnackbar('Error creating profile. Please try again.', {
+          variant: 'error',
+        });
+        setStep(1); // Reset to Step 1 on failure
+      }
+    } else {
+      setStep(step + 1);
     }
   };
-
   return (
     <div>
       {step === 1 && <ProfileDetails onNext={() => setStep(2)} />}
@@ -67,7 +75,7 @@ export default function Profile() {
           onBack={() => setStep(2)}
         />
       )}
-      {/* {step === 4 && (
+      {/*     {step === 4 && (
         <div>
           <h2>Review & Submit</h2>
           <pre>{JSON.stringify(formData, null, 2)}</pre>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   token: null, // Ensure token is set after login
@@ -24,3 +24,4 @@ const authSlice = createSlice({
 
 export const { setToken, setUser, logout } = authSlice.actions;
 export default authSlice.reducer;
+ */

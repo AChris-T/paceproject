@@ -46,7 +46,7 @@ const Register = () => {
         const data = await register(values).unwrap();
         console.log('Login successful:', data);
         Cookies.set('authToken', JSON.stringify(data), { expires: 2 }); // `expires: 2` means 2 hours
-        navigate('/profile-creation');
+        navigate('/login');
         enqueueSnackbar('Creation of User successful!', { variant: 'success' });
       } catch (error) {
         console.error('Login failed:', error.data);
@@ -84,9 +84,7 @@ const Register = () => {
         </div>
         <div className="flex flex-col gap-3">
           <label
-            className="text-[#f2f2f2] 
-      text-start  font-medium
-      text-[16px]"
+            className="text-[#f2f2f2] text-start  font-medium text-[16px]"
           >
             Phone number
           </label>
@@ -97,8 +95,8 @@ const Register = () => {
             onBlur={formik.handleBlur}
             value={formik.values.phoneNumber}
             className="bg-transparent 
-        border-b-[1px] font-normal outline-none 
-        text-[#FFFFFF]"
+            border-b-[1px] font-normal outline-none 
+          text-[#FFFFFF]"
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
             <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
@@ -109,7 +107,7 @@ const Register = () => {
         <div className="flex flex-col gap-3">
           <label
             className="text-[#f2f2f2] 
-          text-start font-medium          text-[16px]"
+          text-start font-medium text-[16px]"
           >
             Password
           </label>
@@ -121,8 +119,8 @@ const Register = () => {
             onBlur={formik.handleBlur}
             value={formik.values.password}
             className="bg-transparent
-         border-b-[1px] outline-none 
-         font-normal text-[#FFFFFF]"
+            border-b-[1px] outline-none 
+            font-normal text-[#FFFFFF]"
           />
           {formik.touched.password && formik.errors.password ? (
             <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
@@ -133,8 +131,8 @@ const Register = () => {
         <div className="flex flex-col gap-3">
           <label
             className="text-[#f2f2f2]
-         text-start font-medium
-          text-[16px]"
+            text-start font-medium
+            text-[16px]"
           >
             Confirm Password
           </label>
@@ -145,8 +143,8 @@ const Register = () => {
             onBlur={formik.handleBlur}
             value={formik.values.confirmPassword}
             className="bg-transparent
-         border-b-[1px] outline-none 
-         font-normal text-[#FFFFFF]"
+            border-b-[1px] outline-none 
+            font-normal text-[#FFFFFF]"
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
             <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">

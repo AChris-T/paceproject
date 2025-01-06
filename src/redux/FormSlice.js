@@ -26,7 +26,7 @@ const formSlice = createSlice({
       state.department = action.payload;
     },
     saveSubjects: (state, action) => {
-      state.subjects = action.payload;
+      state.subjectsOfInterest = action.payload;
     },
     resetForm: () => initialState,
   },

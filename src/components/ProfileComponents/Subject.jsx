@@ -21,41 +21,43 @@ import {
 } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { saveSubjects } from '../../redux/FormSlice';
+import { useNavigate } from 'react-router-dom';
 
-export default function Subject({ onBack, handleSubmit }) {
+export default function Subject({ onBack, handleSubmit, onNext }) {
   const dispatch = useDispatch();
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const subjects = [
     { name: 'Mathematics', icon: FaCalculator },
-    { name: 'English Language', icon: FaBook },
+    { name: 'English-Language', icon: FaBook },
     { name: 'Physics', icon: FaAtom },
     { name: 'Chemistry', icon: FaFlask },
     { name: 'Biology', icon: FaLeaf },
     { name: 'Economics', icon: FaMoneyBillWave },
     { name: 'Government', icon: FaGavel },
-    { name: 'Literature in English', icon: FaTheaterMasks },
-    { name: 'Agricultural Science', icon: FaTractor },
+    { name: 'Literature-in-English', icon: FaTheaterMasks },
+    { name: 'Agricultural-Science', icon: FaTractor },
     { name: 'Geography', icon: FaMapMarkedAlt },
     { name: 'Commerce', icon: FaCashRegister },
-    { name: 'Financial Accounting', icon: FaMoneyBillWave },
+    { name: 'Financial-Accounting', icon: FaMoneyBillWave },
     { name: 'CRK/IRK', icon: FaBible },
-    { name: 'Further Mathematics', icon: FaSquareRootAlt },
+    { name: 'Further-Mathematics', icon: FaSquareRootAlt },
     { name: 'History', icon: FaHistory },
-    { name: 'Computer Studies', icon: FaDesktop },
+    { name: 'Computer-Studies', icon: FaDesktop },
     // Add more subjects as needed
   ];
 
-  const handleSelect = (subject) => {
+  const handleSelect = (subjectsOfInterest) => {
     // Toggle selection of subjects
-    const updatedSubjects = selectedSubjects.includes(subject.name)
-      ? selectedSubjects.filter((s) => s !== subject.name)
-      : [...selectedSubjects, subject.name];
+    const updatedSubjects = selectedSubjects.includes(subjectsOfInterest.name)
+      ? selectedSubjects.filter((s) => s !== subjectsOfInterest.name)
+      : [...selectedSubjects, subjectsOfInterest.name];
 
     // Update the selected subjects state
     setSelectedSubjects(updatedSubjects);
-    formik.setFieldValue('subject', updatedSubjects); // Update Formik field value
+    formik.setFieldValue('subjectsOfInterest', updatedSubjects); // Update Formik field value
 
     // If more than 4 subjects are selected, show error
     if (updatedSubjects.length > 4) {
@@ -66,19 +68,22 @@ export default function Subject({ onBack, handleSubmit }) {
   };
 
   const formik = useFormik({
-    initialValues: { subject: '' },
+    initialValues: { subjectsOfInterest: '' },
     validate: (values) => {
       const errors = {};
-      if (values.subject.length === 0)
-        errors.subject = 'At least one subject must be selected.';
+      if (values.subjectsOfInterest.length === 0)
+        errors.subjectsOfInterest =
+          'At least one subjectsOfInterest must be selected.';
       return errors;
     },
     onSubmit: (values) => {
-      if (values.subject.length > 0) {
-        dispatch(saveSubjects({ subject: values.subject }));
+      if (values.subjectsOfInterest.length > 0) {
+        dispatch(
+          saveSubjects({ subjectsOfInterest: values.subjectsOfInterest })
+        );
         handleSubmit();
       } else {
-        setError('You must select at least one subject.');
+        setError('You must select at least one subjectsOfInterest.');
       }
     },
   });
@@ -97,32 +102,32 @@ export default function Subject({ onBack, handleSubmit }) {
         </div>
         <form onSubmit={formik.handleSubmit} className="space-y-4 mt-[24px]">
           <div className="grid grid-cols-2 gap-2 ">
-            {subjects.map((subject) => {
-              const Icon = subject.icon;
+            {subjects.map((subjectsOfInterest) => {
+              const Icon = subjectsOfInterest.icon;
               return (
                 <label
-                  key={subject.name}
-                  onClick={() => handleSelect(subject)}
+                  key={subjectsOfInterest.name}
+                  onClick={() => handleSelect(subjectsOfInterest)}
                   className={`flex items-center justify-between w-30 p-4 border rounded-lg cursor-pointer transition ${
-                    selectedSubjects.includes(subject.name)
+                    selectedSubjects.includes(subjectsOfInterest.name)
                       ? 'border-green-Primary_1 bg-green-Primary_1 text-white'
                       : 'border-gray-300 bg-gray-100'
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    {selectedSubjects.includes(subject.name) ? (
+                    {selectedSubjects.includes(subjectsOfInterest.name) ? (
                       <FaCheckCircle className="text-white" size={20} />
                     ) : (
                       <Icon className="text-gray-500" size={20} />
                     )}
                     <span
                       className={`font-medium ${
-                        selectedSubjects.includes(subject.name)
+                        selectedSubjects.includes(subjectsOfInterest.name)
                           ? 'text-white'
                           : 'text-gray-700'
                       }`}
                     >
-                      {subject.name}
+                      {subjectsOfInterest.name}
                     </span>
                   </div>
                 </label>
@@ -131,8 +136,10 @@ export default function Subject({ onBack, handleSubmit }) {
           </div>
 
           {error && <div className="text-red-500">{error}</div>}
-          {formik.errors.subject && (
-            <div className="text-red-500">{formik.errors.subject}</div>
+          {formik.errors.subjectsOfInterest && (
+            <div className="text-red-500">
+              {formik.errors.subjectsOfInterest}
+            </div>
           )}
 
           <div className="mt-10 cursor-pointer mb-14">

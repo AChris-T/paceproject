@@ -25,11 +25,6 @@ export const Auth = createApi({
         url: '/auth/sign-in',
         method: 'POST',
         body,
-
-        // This is used if you need to set a different header for a particular request e.g file upload
-        // headers:{
-        //   "Content-Type": "multipart/form-data",
-        // }
       }),
     }),
 
@@ -63,6 +58,12 @@ export const Auth = createApi({
         body,
       }),
     }),
+    getDashboardProfile: builder.query({
+      query: () => ({
+        url: '/student/get-profile',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -73,4 +74,5 @@ export const {
   useForgetPasswordMutation,
   useResetPasswordMutation,
   useProilfeCreationMutation,
+  useGetDashboardProfileQuery,
 } = Auth;
