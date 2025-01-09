@@ -5,7 +5,7 @@ import PrcaticeIcon from '../../components/Icons/PrcaticeIcon';
 import TimerIcon from '../../components/Icons/TimerIcon';
 import ReferIcon from '../../components/Icons/ReferIcon';
 import { useGetDashboardProfileQuery } from '../../redux/api/Auth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import board from '../../assets/PaceAppLogo/board.png';
 import { ClipLoader } from 'react-spinners';
 import { useState } from 'react';
@@ -37,6 +37,7 @@ export default function Home() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [selectedSubject, setSelectedSubject] = useState('');
+  const navigate = useNavigate();
 
   const handleSelect = (subject) => {
     setSelectedSubject(subject); // Allow only one subject to be selected at a time
@@ -44,7 +45,9 @@ export default function Home() {
 
   const handleNext = () => {
     if (selectedSubject) {
-      console.log('Submitted subject:', selectedSubject);
+      localStorage.setItem('subjectSelected', selectedSubject);
+      alert(`Submitted subject: ${selectedSubject}`);
+      navigate('/question');
     } else {
       console.log('No subject selected');
     }

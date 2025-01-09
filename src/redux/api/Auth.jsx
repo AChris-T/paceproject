@@ -64,6 +64,20 @@ export const Auth = createApi({
         method: 'GET',
       }),
     }),
+    getCurrentSubject: builder.query({
+      query: () => {
+        const subjectSelected = localStorage.getItem('subjectSelected');
+        // Retrieve ID from localStorage
+        if (!subjectSelected) {
+          throw new Error('ID is not available in localStorage');
+        }
+        console.log('newId', subjectSelected);
+        return {
+          url: `/practice/questions?subject=${subjectSelected}`, // Append as query param
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
@@ -75,4 +89,5 @@ export const {
   useResetPasswordMutation,
   useProilfeCreationMutation,
   useGetDashboardProfileQuery,
+  useGetCurrentSubjectQuery,
 } = Auth;

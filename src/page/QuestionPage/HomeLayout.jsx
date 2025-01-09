@@ -43,7 +43,7 @@ export default function HomeLayout() {
           }}
         >
           <HiOutlineTrophy className="text-[20px]" />
-          {pathname === '/app/leader' ? 'Leader..' : ''}
+          {pathname === '/app/leader' ? 'Leaderboard' : ''}
         </NavLink>
         <NavLink
           to="notification"
@@ -60,7 +60,7 @@ export default function HomeLayout() {
           }}
         >
           <IoMdNotificationsOutline className="text-[20px]" />
-          {pathname === '/app/notification' ? 'Notifica..' : ''}
+          {pathname === '/app/notification' ? 'Notification' : ''}
         </NavLink>
         <NavLink
           to="profile"

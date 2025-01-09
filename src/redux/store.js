@@ -7,10 +7,6 @@ export const store = configureStore({
   reducer: {
     [Auth.reducerPath]: Auth.reducer,
     form: formReducer,
-
-    /*  [ProfileApi.reducerPath]: ProfileApi.reducer,
-    [CountryStateApi.reducerPath]: CountryStateApi.reducer,
-    [FacultyDepartmentApi.reducerPath]: FacultyDepartmentApi.reducer, */
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(Auth.middleware), // Disable the default serializable check for the Redux Toolkit Query slice

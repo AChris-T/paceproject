@@ -16,6 +16,7 @@ import HomeLayout from './page/QuestionPage/HomeLayout';
 import LeaderBoard from './page/QuestionPage/LeaderBoard';
 import Notification from './page/QuestionPage/Notification';
 import ProfileDetails from './page/QuestionPage/Profile';
+import Question from './page/QuestionPage/Question';
 
 function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
@@ -40,6 +41,14 @@ function App() {
           element={
             <ProtectedRoute allowProfileCreation={allowProfileCreation}>
               <Profile />{' '}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/question"
+          element={
+            <ProtectedRoute>
+              <Question />
             </ProtectedRoute>
           }
         />
