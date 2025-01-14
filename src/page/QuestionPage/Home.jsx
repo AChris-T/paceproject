@@ -46,7 +46,6 @@ export default function Home() {
   const handleNext = () => {
     if (selectedSubject) {
       localStorage.setItem('subjectSelected', selectedSubject);
-      alert(`Submitted subject: ${selectedSubject}`);
       navigate('/question');
     } else {
       console.log('No subject selected');
@@ -107,7 +106,7 @@ export default function Home() {
       </div>
       <div
         onClick={handleOpen}
-        className="bg-[#167E95] flex gap-5 items-center md:py-[16px] py-[22px] tracking-wide  text-white mt-[15px] rounded-[10px] px-[29px]  newbgn"
+        className="bg-[#167E95] cursor-pointer flex gap-5 items-center md:py-[16px] py-[22px] tracking-wide  text-white mt-[15px] rounded-[10px] px-[29px]  newbgn"
       >
         <PrcaticeIcon />
         <h2>PRATICE NOW</h2>
@@ -137,13 +136,17 @@ export default function Home() {
               label={subject}
             />
           ))}
-          <Button
-            variant="contained"
-            onClick={handleNext}
-            disabled={!selectedSubject} // Disable the button until a subject is selected
-          >
-            Next
-          </Button>
+          {selectedSubject ? (
+            <button
+              className="py-2 text-white rounded-lg mt-9 bg-green-Primary_1"
+              onClick={handleNext}
+              disabled={!selectedSubject} // Disable the button until a subject is selected
+            >
+              Next
+            </button>
+          ) : (
+            ''
+          )}
         </Box>
       </Modal>
     </div>
