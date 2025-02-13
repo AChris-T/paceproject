@@ -78,12 +78,19 @@ export const Auth = createApi({
         };
       },
     }),
+    getLeaderboard: builder.query({
+      query: () => ({
+        url: '/leaderboard',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components
 export const {
   useLoginMutation,
+  useGetLeaderboardQuery,
   useRegisterUserMutation,
   useForgetPasswordMutation,
   useResetPasswordMutation,

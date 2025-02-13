@@ -10,11 +10,11 @@ export default function HomeLayout() {
   console.log(location.pathname);
   const pathname = location?.pathname;
   return (
-    <div className="flex flex-col bg-[#0000001A] justify-between h-[100vh]">
+    <div className="flex flex-col bg-white justify-between h-[100vh]">
       <div>
         <Outlet />
       </div>
-      <div className="flex bg-white h-[70px] justify-between shadow-2xl  items-center px-[6px]">
+      <div className="flex bg-white border-t-[2px]  h-[70px] justify-between shadow-2xl  items-center px-[6px]">
         <NavLink
           to="home"
           className={`text-[12px] flex gap-1 rounded-full items-center px-[24px] py-[7px] font-normal  ${
