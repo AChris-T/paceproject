@@ -53,7 +53,7 @@ const Login = ({ setAllowProfileCreation }) => {
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <label className="text-[#f2f2f2] font-medium text-[16px] text-start">
-              Phone Number/ Username
+              Phone Number / Username
             </label>
             <input
               name="username"
