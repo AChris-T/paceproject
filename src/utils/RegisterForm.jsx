@@ -56,7 +56,7 @@ const Register = () => {
         console.log('Login successful:', data);
         Cookies.set('authToken', JSON.stringify(data), { expires: 2 }); // `expires: 2` means 2 hours
         navigate('/login');
-        enqueueSnackbar('Creation of User successful!', { variant: 'success' });
+        enqueueSnackbar('User Created Successfully!', { variant: 'success' });
       } catch (error) {
         console.error('Login failed:', error.data);
         enqueueSnackbar(error.data.message, { variant: 'error' });
