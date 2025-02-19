@@ -212,14 +212,14 @@ export default function ProfileDetails({ onNext }) {
                 <img
                   src={imagePreview}
                   alt="preview"
-                  className="mt-3 w-[85px] border-dashed border-gray-900 border-[1px] p-1 h-[85px] rounded-full"
+                  className="mt-3 w-[85px] object-cover  border-dashed border-gray-900 border-[1px] p-1 h-[85px] rounded-full"
                 />
               ) : (
                 <img
                   src={user}
                   alt="preview"
                   onClick={triggerFileInput}
-                  className="mt-3 w-[85px] border-dashed border-gray-900 border-[1px] p-1 h-[85px] rounded-full"
+                  className="mt-3 w-[85px] object-cover border-dashed border-gray-900 border-[1px] p-1 h-[85px] rounded-full"
                 />
               )}
               {formik.errors.image && (
