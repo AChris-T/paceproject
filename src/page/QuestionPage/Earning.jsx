@@ -48,7 +48,7 @@ export default function Earning() {
         ))}
       </div>
       <div className="flex flex-col justify-center w-full gap-5 mt-10">
-        {data?.data?.leaderboard.map((user, index) => (
+        {data?.data?.leaderboard.slice(3).map((user, index) => (
           <div className="flex items-center w-full gap-2">
             <h2 className="text-white">{index + 1}</h2>
             <div
