@@ -50,7 +50,7 @@ export default function ProfileDetails({ onNext }) {
       }
 
       // Validate email
-      if (!values.personalDetails.email) {
+      /*   if (!values.personalDetails.email) {
         errors.email = 'Email is required';
       } else if (
         !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(
@@ -58,16 +58,12 @@ export default function ProfileDetails({ onNext }) {
         )
       ) {
         errors.email = 'Invalid email address';
-      }
+      } */
 
       // Validate gender
       if (!values.personalDetails.gender) {
         errors.gender = 'Gender is required';
-      } else if (
-        !['Male', 'Female', 'Non-Binary', 'Other'].includes(
-          values.personalDetails.gender
-        )
-      ) {
+      } else if (!['Male', 'Female'].includes(values.personalDetails.gender)) {
         errors.gender = 'Invalid gender selection';
       }
 
@@ -227,7 +223,7 @@ export default function ProfileDetails({ onNext }) {
                 />
               )}
               {formik.errors.image && (
-                <div className="flex justify-end text-red-500">
+                <div className="flex justify-end text-[12px] font-bold italic text-[#E03069]">
                   {formik.errors.image}
                 </div>
               )}
@@ -240,16 +236,16 @@ export default function ProfileDetails({ onNext }) {
               name="personalDetails.firstName"
               onChange={formik.handleChange}
               value={formik.values.personalDetails.firstName}
-              className="w-full focus:outline-none border-b-[2px] text-gray-700"
+              className="w-full focus:outline-none  border-b-[2px] text-gray-700"
               placeholder="Enter your First Name"
             />
             {formik.errors.firstName && (
-              <div className="flex justify-end text-red-500">
+              <div className="flex justify-end font-bold  text-[12px] italic text-[#E03069]">
                 {formik.errors.firstName}
               </div>
             )}
           </div>
-          <div className="mt-4 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-4">
             <label>Last Name</label>
             <input
               name="personalDetails.lastName"
@@ -259,12 +255,12 @@ export default function ProfileDetails({ onNext }) {
               placeholder="Enter your Last name"
             />
             {formik.errors.lastName && (
-              <div className="flex justify-end text-red-500">
+              <div className="flex justify-end text-[12px] font-bold italic text-[#E03069]">
                 {formik.errors.lastName}
               </div>
             )}
           </div>
-          <div className="mt-4 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-4">
             <label>E-mail</label>
             <input
               type="email"
@@ -275,12 +271,12 @@ export default function ProfileDetails({ onNext }) {
               placeholder="Enter your Email"
             />
             {formik.errors.email && (
-              <div className="flex justify-end text-red-500">
+              <div className="flex justify-end text-[12px] font-bold italic text-[#E03069]">
                 {formik.errors.email}
               </div>
             )}
           </div>
-          <div className="mt-4 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-4">
             <label>Gender</label>
             <select
               name="personalDetails.gender"
@@ -291,16 +287,14 @@ export default function ProfileDetails({ onNext }) {
               <option value="">select your Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-              <option value="Non-Binary">Non-Binary</option>
-              <option value="Other">Other</option>
             </select>
             {formik.errors.gender && (
-              <div className="flex justify-end text-red-500">
+              <div className="flex justify-end text-[12px] font-bold italic text-[#E03069]">
                 {formik.errors.gender}
               </div>
             )}
           </div>
-          <div className="mt-4 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-4">
             <label>Date of Birth</label>
             <input
               type="date"
@@ -310,12 +304,12 @@ export default function ProfileDetails({ onNext }) {
               className="w-full focus:outline-none border-b-[2px] text-gray-700"
             />
             {formik.errors.dateOfBirth && (
-              <div className="flex justify-end text-red-500">
+              <div className="flex justify-end font-bold  text-[12px] italic text-[#E03069]">
                 {formik.errors.dateOfBirth}
               </div>
             )}
           </div>
-          <div className="mt-4 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-4">
             <label>Level of Study</label>
             <select
               name="personalDetails.levelOfStudy"
@@ -331,7 +325,7 @@ export default function ProfileDetails({ onNext }) {
               <option value="JAMB">JAMB</option>
             </select>
             {formik.errors.levelOfStudy && (
-              <div className="flex justify-end text-red-500">
+              <div className="flex justify-end font-bold text-[12px] italic text-[#E03069]">
                 {formik.errors.levelOfStudy}
               </div>
             )}

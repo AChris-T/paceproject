@@ -17,6 +17,8 @@ const Register = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+  const phoneRegex = /^(\+?234|0)?[789][01]\d{8}$|^\+[1-9]\d{6,14}$/; // Supports Nigerian and International numbers
+
   // Formik configuration
   const formik = useFormik({
     initialValues: {
@@ -32,12 +34,9 @@ const Register = () => {
         .required('Username is required'),
 
       phoneNumber: Yup.string()
-        .test('is-valid-phone', 'Invalid phone number', (value) => {
-          if (!value) return false; // Ensure value is not empty
-          const phoneNumber = parsePhoneNumberFromString(value);
-          return phoneNumber ? phoneNumber.isValid() : false;
-        })
+        .matches(phoneRegex, 'Invalid phone number format')
         .required('Phone number is required'),
+
       password: Yup.string()
         .min(6, 'Password must be at least 6 characters')
         .max(20, 'Password must not exceed 20 characters')
