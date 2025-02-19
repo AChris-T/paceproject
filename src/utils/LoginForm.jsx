@@ -41,7 +41,6 @@ const Login = ({ setAllowProfileCreation }) => {
       } catch (error) {
         console.error('Login failed:', error);
         enqueueSnackbar('invalid credentials', { variant: 'error' });
-
       } finally {
         setSubmitting(false);
       }
@@ -66,7 +65,7 @@ const Login = ({ setAllowProfileCreation }) => {
               className="bg-transparent border-b-[1px] focus:bg-none font-normal outline-none text-[#FFFFFF]"
             />
             {formik.touched.username && formik.errors.username ? (
-              <div className="text-red-600 text-end -mt-3 text-[12px] popins font-normal">
+              <div className="text-[#FF0000] text-end -mt-3 text-[12px] popins font-normal">
                 {formik.errors.username}
               </div>
             ) : null}

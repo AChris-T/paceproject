@@ -10,6 +10,7 @@ import { useRegisterUserMutation } from '../redux/api/Auth';
 import { useSnackbar } from 'notistack';
 import { useFormik } from 'formik';
 import Cookies from 'js-cookie';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 const Register = () => {
   const [register, { isLoading }] = useRegisterUserMutation();
@@ -30,8 +31,13 @@ const Register = () => {
         .max(20, 'Username must not exceed 20 characters')
         .required('Username is required'),
 
-      phoneNumber: Yup.string().required('Phone number is required'),
-
+      phoneNumber: Yup.string()
+        .test('is-valid-phone', 'Invalid phone number', (value) => {
+          if (!value) return false; // Ensure value is not empty
+          const phoneNumber = parsePhoneNumberFromString(value);
+          return phoneNumber ? phoneNumber.isValid() : false;
+        })
+        .required('Phone number is required'),
       password: Yup.string()
         .min(6, 'Password must be at least 6 characters')
         .max(20, 'Password must not exceed 20 characters')
@@ -81,7 +87,7 @@ const Register = () => {
          text-[#FFFFFF]"
           />
           {formik.touched.username && formik.errors.username ? (
-            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-2 text-[14px] popins font-normal">
               {formik.errors.username}
             </div>
           ) : null}
@@ -101,7 +107,7 @@ const Register = () => {
           text-[#FFFFFF]"
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-2 text-[14px] popins font-normal">
               {formik.errors.phoneNumber}
             </div>
           ) : null}
@@ -125,7 +131,7 @@ const Register = () => {
             font-normal text-[#FFFFFF]"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-2 text-[14px] popins font-normal">
               {formik.errors.password}
             </div>
           ) : null}
@@ -149,7 +155,7 @@ const Register = () => {
             font-normal text-[#FFFFFF]"
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-2 text-[14px] popins font-normal">
               {formik.errors.confirmPassword}
             </div>
           ) : null}

@@ -16,9 +16,9 @@ const ForgetPassword = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(3, 'Username must be at least 3 characters')
-        .max(20, 'Username must not exceed 20 characters')
-        .required('Username is required'),
+        .min(3, 'Username/phone number must be at least 3 characters')
+        .max(20, 'Username/phone number must not exceed 20 characters')
+        .required('Username/phone number is required'),
     }),
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
@@ -48,7 +48,7 @@ const ForgetPassword = () => {
           <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3">
             <div className="flex flex-col gap-3">
               <label className="text-[#f2f2f2] font-medium text-[16px] text-start">
-                Phone Number
+                Phone Number / Username
               </label>
               <input
                 name="username"
@@ -60,7 +60,7 @@ const ForgetPassword = () => {
                 className="bg-transparent border-b-[1px] focus:bg-none font-normal outline-none text-[#FFFFFF]"
               />
               {formik.touched.username && formik.errors.username ? (
-                <div className="text-red-600 text-end -mt-3 text-[12px] popins font-normal">
+                <div className="text-[#ff0000] text-end -mt-2 text-[12px] popins font-normal">
                   {formik.errors.username}
                 </div>
               ) : null}
