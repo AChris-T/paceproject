@@ -81,7 +81,7 @@ const Register = () => {
          text-[#FFFFFF]"
           />
           {formik.touched.username && formik.errors.username ? (
-            <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
               {formik.errors.username}
             </div>
           ) : null}
@@ -101,7 +101,7 @@ const Register = () => {
           text-[#FFFFFF]"
           />
           {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-            <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
               {formik.errors.phoneNumber}
             </div>
           ) : null}
@@ -125,7 +125,7 @@ const Register = () => {
             font-normal text-[#FFFFFF]"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
               {formik.errors.password}
             </div>
           ) : null}
@@ -149,7 +149,7 @@ const Register = () => {
             font-normal text-[#FFFFFF]"
           />
           {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-            <div className="text-red-600 text-end -mt-3 text-[14px] popins font-normal">
+            <div className="text-[#FF0000] text-end -mt-3 text-[14px] popins font-normal">
               {formik.errors.confirmPassword}
             </div>
           ) : null}
