@@ -1,8 +1,28 @@
 import { useGetLeaderboardQuery } from '../../redux/api/Auth';
+import board from '../../assets/PaceAppLogo/board.png';
+import { ClipLoader } from 'react-spinners';
+import { Navigate } from 'react-router-dom';
 
 export default function Earning() {
-  const { data, isError, isLoading } = useGetLeaderboardQuery();
+  const { data, error, isLoading } = useGetLeaderboardQuery();
   console.log('leader', data);
+  if (isLoading)
+    return (
+      <div>
+        <ClipLoader />
+      </div>
+    );
+  if (error)
+    return (
+      <div>
+        Error:{' '}
+        {error.status === 401 ? (
+          <Navigate to="/auth/login" />
+        ) : (
+          'Please check your network'
+        )}
+      </div>
+    );
   return (
     <div>
       <div className="flex justify-between w-full">
