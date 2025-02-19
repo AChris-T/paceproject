@@ -322,7 +322,7 @@ export default function ProfileDetails({ onNext }) {
               </option>
               <option value="A-Level">A'Level</option>
               <option value="UTME">UTME</option>
-              <option value="JAMB">JAMB</option>
+              <option value="JAMB">O'Level (WAEC/NECO)</option>
             </select>
             {formik.errors.levelOfStudy && (
               <div className="flex justify-end font-bold text-[12px] italic text-[#E03069]">
