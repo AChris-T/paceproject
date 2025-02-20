@@ -82,7 +82,7 @@ export default function ProfileDetails({ onNext }) {
           age--;
         }
         if (age < 13) {
-          errors.dateOfBirth = 'You must be at least 18 years old';
+          errors.dateOfBirth = 'You must be at least 13 years old';
         }
       }
 

@@ -10,7 +10,7 @@ export default function Notification() {
           <IoIosNotifications className="text-white w-[100px] h-[100px]" />
         </div>
         <h3 className=" mt-[27px] w-[218px] text-center">
-          You don't have any Notification yet.
+          You don't have any notifications yet.
         </h3>
       </div>
     </div>
