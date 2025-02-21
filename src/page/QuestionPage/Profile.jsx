@@ -6,7 +6,7 @@ export default function Profile() {
   return (
     <div className="border w-full h-[90vh] overflow-y-auto overflow-x-hidden scrollbar-hide">
       {/* Header */}
-      <div className="bg-emerald-500">
+      <div className="bg-green-Primary_1">
         <div className="px-6 pt-8 pb-4 flex justify-between items-center">
           <h1 className="text-white text-2xl">Profile</h1>
           <button
