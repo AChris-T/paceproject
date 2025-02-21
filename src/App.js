@@ -22,7 +22,7 @@ function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
 
   return (
-    <div className="max-w-[740px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
+    <div className="max-w-[540px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<UtilLayout />}>

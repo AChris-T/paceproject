@@ -176,7 +176,7 @@ export default function Question() {
             <h2 className="mb-4 text-lg font-bold">Confirm Action</h2>
             <p className="mb-4">
               {modalType === 'end'
-                ? 'Are you sure you want to end the session? You will be redirected to the home page.'
+                ? 'Are you sure you want to end the session? You will lose your progress and  be redirected to the home page.'
                 : modalType === 'reload'
                 ? 'If you reload the page, you will be redirected to the home page. Do you want to proceed?'
                 : 'You cannot go back to the previous page. Do you want to leave this page?'}
