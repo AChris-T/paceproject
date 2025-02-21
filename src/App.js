@@ -15,14 +15,16 @@ import Home from './page/QuestionPage/Home';
 import HomeLayout from './page/QuestionPage/HomeLayout';
 import LeaderBoard from './page/QuestionPage/LeaderBoard';
 import Notification from './page/QuestionPage/Notification';
-import ProfileDetails from './page/QuestionPage/Profile';
+import UserProfile, { EditProfile } from './page/QuestionPage/Profile';
 import Question from './page/QuestionPage/Question';
+import ProfileSettings from './page/QuestionPage/Profile';
+import ProfileDetails from './components/ProfileComponents/ProfileDetails';
 
 function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
 
   return (
-    <div className="max-w-[540px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
+    <div className="max-w-[740px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<UtilLayout />}>
@@ -34,6 +36,7 @@ function App() {
           />
           <Route path="/register" element={<Register />} />
         </Route>
+
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/reset_password" element={<ResetPassword />} />
         <Route
@@ -63,7 +66,8 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="leader" element={<LeaderBoard />} />
           <Route path="notification" element={<Notification />} />
-          <Route path="profile" element={<ProfileDetails />} />
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="edit-profile" element={<EditProfile />} />
         </Route>
       </Routes>
     </div>

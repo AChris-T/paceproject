@@ -23,6 +23,7 @@ export default function Earning() {
         )}
       </div>
     );
+
   return (
     <div>
       {/* <div className="flex justify-between w-full">
