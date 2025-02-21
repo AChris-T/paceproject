@@ -5,9 +5,7 @@ import UtilLayout from '../src/utils/UtilLayout';
 import Login from '../src/utils/LoginForm';
 import Register from '../src/utils/RegisterForm';
 import ForgetPassword from '../src/utils/ForgetPassword';
-
 import { Routes, Route, Navigate } from 'react-router-dom';
-
 import { ToastContainer, toast } from 'react-toastify';
 import Profile from './page/Profile';
 import ProtectedRoute from './constants/ProtectedRoute';
