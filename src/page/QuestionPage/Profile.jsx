@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Create a context to share profile data between components
 export const ProfileContext = React.createContext();
@@ -75,7 +77,7 @@ export default function Profile() {
 
   return (
     <ProfileContext.Provider value={{ profileData, setProfileData }}>
-      <div className="border w-[400px] h-[99vh] overflow-y-auto overflow-x-hidden scrollbar-hide">
+      <div className="border h-[90vh] overflow-y-auto overflow-x-hidden scrollbar-hide">
         {/* Header */}
         <div className="bg-emerald-500">
           <div className="px-6 pt-8 pb-4 flex justify-between items-center">
@@ -167,6 +169,7 @@ export default function Profile() {
 export function EditProfile() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
   const [formData, setFormData] = React.useState({
@@ -272,13 +275,16 @@ export function EditProfile() {
     e.preventDefault();
 
     if (!validateForm()) {
+      toast.error('Please fill in all required fields');
       return;
     }
 
+    setSubmitting(true);
     try {
       const token = Cookies.get('authToken');
       if (!token) {
         setError('Authentication token not found');
+        toast.error('Authentication token not found');
         return;
       }
 
@@ -292,14 +298,22 @@ export function EditProfile() {
         }
       );
 
-      navigate('/app/profile');
+      toast.success('Profile updated successfully!');
+      setTimeout(() => {
+        navigate('/app/profile');
+      }, 1500);
     } catch (err) {
       console.error('Error updating profile:', err);
-      setError(err.response?.data?.data?.message || 'Failed to update profile');
+      const errorMessage =
+        err.response?.data?.message || 'Failed to update profile';
+      setError(errorMessage);
+      toast.error(errorMessage);
 
       if (err.response?.status === 401) {
         navigate('/login');
       }
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -311,22 +325,34 @@ export function EditProfile() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <p className="text-red-500 text-center mb-4">{error}</p>
-        <button
-          onClick={() => fetchProfileData()}
-          className="text-emerald-500 underline"
-        >
-          Try Again
-        </button>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center h-screen">
+  //       <p className="text-red-500 text-center mb-4">{error}</p>
+  //       <button
+  //         onClick={() => navigate('/app/edit-profile')}
+  //         className="text-emerald-500 underline"
+  //       >
+  //         Try Again
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   return (
-    <div className="h-[99vh] bg-[#16956C] w-[400px] p-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
+    <div className="h-[99vh] bg-green-Primary_1 w-full p-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {/* Header */}
       <div
         className="flex -ml-1 cursor-pointer borer-b borer-white/30 pb-2 items-center mb-6"
@@ -562,9 +588,19 @@ export function EditProfile() {
           <div className="absolute bg-[#1AB381] w-full z-[1] bottom-[-3px] shadow-sm h-[50px] rounded-full"></div>
           <button
             type="submit"
-            className="relative z-[10] w-full bg-white text-[#16956C] py-4 rounded-full font-medium"
+            disabled={submitting}
+            className={`relative z-[10] w-full bg-white text-[#16956C] py-4 rounded-full font-medium flex items-center justify-center ${
+              submitting ? 'opacity-70 cursor-not-allowed' : ''
+            }`}
           >
-            Save
+            {submitting ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#16956C] mr-2"></div>
+                Saving...
+              </>
+            ) : (
+              'Save'
+            )}
           </button>
         </div>
       </form>

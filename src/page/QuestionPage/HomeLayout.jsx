@@ -4,6 +4,10 @@ import { HiOutlineTrophy } from 'react-icons/hi2';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { VscHome } from 'react-icons/vsc';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import HomeIcon from '../../components/Icons/HomeIcon';
+import LeaderIcon from '../../components/Icons/LeaderIcon';
+import NotificationIcon from '../../components/Icons/NotificationIcon';
+import ProfileIcon from '../../components/Icons/ProfileIcon';
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -27,7 +31,7 @@ export default function HomeLayout() {
             };
           }}
         >
-          <VscHome className="text-[20px]" />
+          <HomeIcon className="text-[20px]" />
           {pathname === '/app/home' ? 'Home' : ''}
         </NavLink>
         <NavLink
@@ -42,7 +46,7 @@ export default function HomeLayout() {
             };
           }}
         >
-          <HiOutlineTrophy className="text-[20px]" />
+          <LeaderIcon className="text-[20px]" />
           {pathname === '/app/leader' ? 'Leaderboard' : ''}
         </NavLink>
         <NavLink
@@ -59,7 +63,7 @@ export default function HomeLayout() {
             };
           }}
         >
-          <IoMdNotificationsOutline className="text-[20px]" />
+          <NotificationIcon className="text-[20px]" />
           {pathname === '/app/notification' ? 'Notification' : ''}
         </NavLink>
         <NavLink
@@ -74,7 +78,7 @@ export default function HomeLayout() {
             };
           }}
         >
-          <FaRegUser className="text-[20px]" />
+          <ProfileIcon className="text-[20px]" />
           {pathname === '/app/profile' ? 'Profile' : ''}
         </NavLink>
       </div>

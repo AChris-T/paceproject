@@ -1,12 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import UtilLayout from '../src/utils/UtilLayout';
 import Login from '../src/utils/LoginForm';
 import Register from '../src/utils/RegisterForm';
 import ForgetPassword from '../src/utils/ForgetPassword';
-
 import { Routes, Route, Navigate } from 'react-router-dom';
-
 import { ToastContainer, toast } from 'react-toastify';
 import Profile from './page/Profile';
 import ProtectedRoute from './constants/ProtectedRoute';
@@ -24,7 +23,7 @@ function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
 
   return (
-    <div className="max-w-[400px] justify-center items-center flex h-full mx-auto border-[1px] shadow-card overflow-hidden ">
+    <div className="max-w-[500px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<UtilLayout />}>
