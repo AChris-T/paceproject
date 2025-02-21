@@ -4,7 +4,11 @@
 // Import necessary Workbox modules
 import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { precacheAndRoute, createHandlerBoundToURL, cleanupOutdatedCaches } from 'workbox-precaching';
+import {
+  precacheAndRoute,
+  createHandlerBoundToURL,
+  cleanupOutdatedCaches,
+} from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 
@@ -20,32 +24,30 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up App Shell-style routing
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
-registerRoute(
-  ({ request, url }) => {
-    if (request.mode !== 'navigate') {
-      return false;
-    }
-    if (url.pathname.startsWith('/_')) {
-      return false;
-    }
-    if (url.pathname.match(fileExtensionRegexp)) {
-      return false;
-    }
-    return true;
-  },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
-);
+registerRoute(({ request, url }) => {
+  if (request.mode !== 'navigate') {
+    return false;
+  }
+  if (url.pathname.startsWith('/_')) {
+    return false;
+  }
+  if (url.pathname.match(fileExtensionRegexp)) {
+    return false;
+  }
+  return true;
+}, createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html'));
 
 // Runtime caching for images with network-first strategy
 registerRoute(
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'),
+  ({ url }) =>
+    url.origin === self.location.origin && url.pathname.endsWith('.png'),
   new StaleWhileRevalidate({
     cacheName: 'images',
     plugins: [
-      new ExpirationPlugin({ 
+      new ExpirationPlugin({
         maxEntries: 50,
         maxAgeSeconds: 24 * 60 * 60, // 24 hours
-        purgeOnQuotaError: true // Automatically cleanup if storage is low
+        purgeOnQuotaError: true, // Automatically cleanup if storage is low
       }),
     ],
   })
@@ -63,7 +65,7 @@ self.addEventListener('install', (event) => {
         ]);
       }),
       // Skip waiting to activate immediately
-      self.skipWaiting()
+      self.skipWaiting(),
     ])
   );
 });
@@ -85,10 +87,12 @@ self.addEventListener('activate', (event) => {
       }),
       // Tell clients about the update
       clients.matchAll().then((clients) => {
-        clients.forEach((client) => client.postMessage({
-          type: 'NEW_VERSION_AVAILABLE'
-        }));
-      })
+        clients.forEach((client) =>
+          client.postMessage({
+            type: 'NEW_VERSION_AVAILABLE',
+          })
+        );
+      }),
     ])
   );
 });
