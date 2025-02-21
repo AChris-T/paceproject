@@ -6,12 +6,13 @@ import { Navigate } from 'react-router-dom';
 export default function Earning() {
   const { data, error, isLoading } = useGetLeaderboardQuery();
   console.log('leader', data);
-  if (isLoading)
+  if (isLoading) {
     return (
-      <div>
-        <ClipLoader />
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
       </div>
     );
+  }
   if (error)
     return (
       <div>
@@ -25,7 +26,31 @@ export default function Earning() {
     );
 
   return (
-    <div>
+    <div className="bg-green-Primary_1  h-[88vh] scrollbar-none new   overflow-y-scroll">
+      <div className="px-[15px] py-[31px]">
+        <h2 className="myFont text-[32px] text-white tracking-wider">
+          Leaderboard
+        </h2>
+        <div className="w-full mt-3">
+          {/* <div className="flex justify-center px-1 py-1 bg-white border-gray-300 rounded-xl ">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.id}
+                className={`px-6 py-2  text-lg font-medium transition-all duration-300 
+              ${
+                activeTab === index
+                  ? 'rounded-xl bg-green-Primary_1 w-full text-[#F2F2F2]'
+                  : 'text-green-Primary_1  font-bold '
+              }
+            `}
+                onClick={() => setActiveTab(index)}
+              >
+                {tab.title}
+              </button>
+            ))}
+          </div> */}
+        </div>
+      </div>{' '}
       {/* <div className="flex justify-between w-full">
         {data?.data?.leaderboard.slice(0, 3).map((user, index) => (
           <div key="">
@@ -48,7 +73,7 @@ export default function Earning() {
           </div>
         ))}
       </div> */}
-      <div className="flex items-center justify-between w-full gap-2">
+      <div className="flex px-[15px] mt-7 items-center justify-between w-full gap-2">
         {data?.data?.leaderboard.slice(0, 3).map((user, index) => (
           <div
             key={index}
@@ -81,7 +106,6 @@ export default function Earning() {
           </div>
         ))}
       </div>
-
       <div className="flex flex-col justify-center w-full gap-5 mt-3">
         {data?.data?.leaderboard.slice(3).map((user, index) => (
           <div className="flex items-center w-full gap-2">
