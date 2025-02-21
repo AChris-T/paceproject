@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Profile() {
   const navigate = useNavigate();
   return (
-    <div className="border w-[400px] h-[90vh] overflow-y-auto overflow-x-hidden scrollbar-hide">
+    <div className="border w-full h-[90vh] overflow-y-auto overflow-x-hidden scrollbar-hide">
       {/* Header */}
       <div className="bg-emerald-500">
         <div className="px-6 pt-8 pb-4 flex justify-between items-center">

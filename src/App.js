@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import UtilLayout from '../src/utils/UtilLayout';
@@ -24,7 +25,7 @@ function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
 
   return (
-    <div className="max-w-[740px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
+    <div className="max-w-[500px] h-full mx-auto border-[1px] shadow-card overflow-hidden ">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<UtilLayout />}>

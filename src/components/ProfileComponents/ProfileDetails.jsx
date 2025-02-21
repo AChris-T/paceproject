@@ -167,7 +167,7 @@ export default function ProfileDetails({ onNext }) {
   };
 
   return (
-    <div className="max-w-[740px] mx-auto border-[1px] shadow-card overflow-x-hidden">
+    <div className="max-w-[500px] mx-auto border-[1px] shadow-card overflow-x-hidden">
       <div className="px-[37px] py-[31px]">
         <div className="flex flex-col">
           <div className="flex items-center justify-between">

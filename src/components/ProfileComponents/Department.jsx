@@ -47,7 +47,7 @@ export default function Department({ onNext, onBack }) {
   };
 
   return (
-    <div className="max-w-[740px]  mx-auto  border-[1px] shadow-card overflow-hidden ">
+    <div className="max-w-[500px]  mx-auto  border-[1px] shadow-card overflow-hidden ">
       <div className=" px-[37px] py-[31px]">
         <div className="flex flex-col">
           <div className="flex items-center justify-between">
