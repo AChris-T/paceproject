@@ -115,7 +115,7 @@ export function EditProfile() {
   };
 
   return (
-    <div className="h-[99vh] bg-[#16956C] w-[400px] p-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
+    <div className="h-[99vh] bg-green-Primary_1 w-full p-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
       {/* Header */}
       <div
         className="flex -ml-1 cursor-pointer borer-b borer-white/30 pb-2 items-center mb-6"
