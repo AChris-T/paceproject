@@ -104,7 +104,7 @@ const Login = ({ setAllowProfileCreation }) => {
           to="/Forget-password"
           className="flex justify-center items-center w-full font-semibold text-[#f9f9f9] text-[14px] italic"
         >
-          Forget password?
+          Forgot password?
         </NavLink>
         <div className="flex flex-row items-center justify-around gap-2">
           <div className="bg-[#E1E4EB] w-full h-[1px] rounded-sm"></div>
