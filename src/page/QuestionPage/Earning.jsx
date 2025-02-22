@@ -92,13 +92,13 @@ export default function Earning() {
                 index === 0 ? 'w-[130px] mt-[-30px]' : 'w-[100px]'
               }`}
             >
-              <img
+              {/*  <img
                 src={user.image}
                 alt=""
                 className={`object-cover rounded-full z-10 h-[100px] bg-gray-200 ${
                   index === 0 ? 'h-[130px] ' : 'h-[100px]'
                 }`}
-              />
+              /> */}
               <div
                 className={`rounded-full ${
                   index === 0 ? 'w-[130px] mt-[-30px]' : 'w-[100px]'
@@ -126,7 +126,7 @@ export default function Earning() {
         ))}
       </div>
       <div className="flex flex-col justify-center w-full gap-5 mt-3">
-        {data?.data?.leaderboard.slice(3).map((user, index) => (
+        {data?.data?.leaderboard.slice(4, 10).map((user, index) => (
           <div className="flex items-center w-full gap-2">
             <h2 className="text-white">{index + 1}</h2>
             <div
