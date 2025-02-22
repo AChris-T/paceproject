@@ -115,7 +115,7 @@ export default function Question() {
       <div className="bg-[#16956C] flex justify-between items-center w-full px-[35px] py-[35px]">
         <h2 className="inter text-white text-[28px]">{Subject}</h2>
         <button
-          className="bg-[#47D1A5] px-10 py-4 rounded-[35px]"
+          className="bg-[#47D1A5] text-white px-10 py-4 rounded-[35px]"
           onClick={handleEndClick}
         >
           End
