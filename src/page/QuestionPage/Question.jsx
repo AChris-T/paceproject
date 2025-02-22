@@ -117,7 +117,7 @@ export default function Question() {
       <div className="bg-[#16956C] flex justify-between items-center w-full px-[35px] py-[35px]">
         <h2 className="inter text-white text-[28px]">{Subject}</h2>
         <button
-          className="bg-[#47D1A5] px-10 py-4 rounded-[35px]"
+          className="bg-[#47D1A5] text-white px-10 py-4 rounded-[35px]"
           onClick={handleEndClick}
         >
           End
@@ -138,7 +138,12 @@ export default function Question() {
               cursor: selectedOption ? 'not-allowed' : 'pointer',
               padding: '10px',
               borderRadius: '5px',
-              border: '2px solid #1A97B3',
+              border:
+                selectedOption === optionKey
+                  ? isCorrect
+                    ? 'none'
+                    : 'none'
+                  : '2px solid #1A97B3',
               backgroundColor:
                 selectedOption === optionKey
                   ? isCorrect
@@ -155,21 +160,38 @@ export default function Question() {
           </div>
         ))}
       </div>
-      <div className="flex justify-end mx-[50px] mt-[20px]">
+
+      <div className="flex px-[37px] w-full mt-[20px]">
         {currentQuestionIndex < TotalQuestion - 1 ? (
-          <button
-            className="bg-[#47D1A5] px-6 py-3 rounded-[35px] disabled:opacity-50"
+          <div className="relative w-full mt-2 cursor-pointer">
+            <div className="z-30   bg-green-Primary_2 rounded-[50px] w-full h-[50px]">
+              {' '}
+            </div>
+            <button
+              onClick={handleNextQuestion}
+              className="w-full mt-[-55px] bg-green-Primary_1 text-white disabled:opacity-50 rounded-[50px]  h-[50px] flex justify-center items-center font-bold leading-[31.2px] text-[18px]"
+            >
+              Next
+            </button>
+          </div>
+        ) : (
+          /*   <button
+            className="bg-green-Primary_1 w-full px-6 py-3 rounded-[35px] disabled:opacity-50"
             onClick={handleNextQuestion}
           >
             Next
-          </button>
-        ) : (
-          <button
-            className="bg-[#47D1A5] px-6 py-3 rounded-[35px]"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+          </button> */
+          <div className="relative w-full mt-2 cursor-pointer">
+            <div className="z-30   bg-green-Primary_2 rounded-[50px] w-full h-[50px]">
+              {' '}
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="w-full mt-[-55px] bg-green-Primary_1 text-white disabled:opacity-50 rounded-[50px]  h-[50px] flex justify-center items-center font-bold leading-[31.2px] text-[18px]"
+            >
+              Submit
+            </button>
+          </div>
         )}
       </div>
       {isModalVisible && (
