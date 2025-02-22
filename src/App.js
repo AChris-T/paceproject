@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<UtilLayout />}>
           <Route
-            path="/login"
+            path="/"
             element={
               <Login setAllowProfileCreation={setAllowProfileCreation} />
             }
