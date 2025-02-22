@@ -18,6 +18,8 @@ import UserProfile, { EditProfile } from './page/QuestionPage/Profile';
 import Question from './page/QuestionPage/Question';
 import ProfileSettings from './page/QuestionPage/Profile';
 import ProfileDetails from './components/ProfileComponents/ProfileDetails';
+import Earning from './page/QuestionPage/Earning';
+import { ResultScreen } from './components/ResultScreen';
 
 function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
@@ -63,10 +65,11 @@ function App() {
           }
         >
           <Route path="home" element={<Home />} />
-          <Route path="leader" element={<LeaderBoard />} />
+          <Route path="leader" element={<Earning />} />
           <Route path="notification" element={<Notification />} />
           <Route path="profile" element={<UserProfile />} />
           <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="result" element={<ResultScreen />} />
         </Route>
       </Routes>
     </div>
