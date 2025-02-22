@@ -532,7 +532,7 @@ export function EditProfile() {
             name="dateOfBirth"
             value={formData.dateOfBirth}
             onChange={handleChange}
-            className="w-full bg-transparent border-b font-bold border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white"
+            className="w-full bg-transparent border-b font-bold border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white pr-2 [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-100"
           />
           {validationErrors.dateOfBirth && (
             <p className="text-red-300 text-xs mt-1">
