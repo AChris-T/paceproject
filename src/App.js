@@ -19,6 +19,10 @@ import Question from './page/QuestionPage/Question';
 import ProfileSettings from './page/QuestionPage/Profile';
 import ProfileDetails from './components/ProfileComponents/ProfileDetails';
 import Earning from './page/QuestionPage/Earning';
+<<<<<<< HEAD
+import { ResultScreen } from './components/ResultScreen';
+=======
+>>>>>>> 297ed19e9d52b64438a2db86e787a18da5518ec1
 
 function App() {
   const [allowProfileCreation, setAllowProfileCreation] = useState(false);
@@ -68,6 +72,7 @@ function App() {
           <Route path="notification" element={<Notification />} />
           <Route path="profile" element={<UserProfile />} />
           <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="result" element={<ResultScreen />} />
         </Route>
       </Routes>
     </div>

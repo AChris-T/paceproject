@@ -76,10 +76,12 @@ export default function Question() {
   };
 
   const handleSubmit = () => {
-    alert(
-      `You answered ${correctAnswers} out of ${TotalQuestion} questions correctly.`
-    );
-    navigate('/app/home'); // Redirect to the home page
+    // alert(
+    //   `You answered ${correctAnswers} out of ${TotalQuestion} questions correctly.`
+    // );
+    localStorage.setItem('correctAnswers', correctAnswers);
+    localStorage.setItem('totalQuestion', TotalQuestion);
+    navigate('/app/result'); // Redirect to the home page
   };
   const handleEndClick = () => {
     setModalType('end');

@@ -6,6 +6,12 @@ import { Navigate } from 'react-router-dom';
 export default function Earning() {
   const { data, error, isLoading } = useGetLeaderboardQuery();
   console.log('leader', data);
+  // if (isLoading)
+  //   return (
+  //     <div>
+  //       <ClipLoader />
+  //     </div>
+  //   );
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -93,16 +99,30 @@ export default function Earning() {
                   index === 0 ? 'h-[130px] ' : 'h-[100px]'
                 }`}
               />
-              <div className="mt-[-20px] ml-[10px] bg-white w-[30px] relative text-green-Primary_1 text-xl z-50 h-[30px] rounded-full items-center justify-center flex">
-                {index + 1}
+                <div
+                  className={`rounded-full ${
+                    index === 0 ? 'w-[130px] mt-[-30px]' : 'w-[100px]'
+                  }`}
+                >
+                  <img
+                    src={user.image}
+                    alt=""
+                    className={`object-cover rounded-full z-10 h-[100px] bg-gray-200 ${
+                      index === 0 ? 'h-[130px] ' : 'h-[100px]'
+                    }`}
+                  />
+                  <div className="mt-[-20px] ml-[10px] bg-white w-[30px] relative text-green-Primary_1 text-xl z-50 h-[30px] rounded-full items-center justify-center flex">
+                    {index + 1}
+                  </div>
+                  <h2 className="text-lg text-center text-white">
+                    {user.firstName}
+                  </h2>
+                  <h2 className="mt-3 text-lg text-center bg-white rounded-[5px] shadow-xl">
+                    {user.questionsAnsweredCorrectly}
+                  </h2>
+                </div>
               </div>
-              <h2 className="text-lg text-center text-white">
-                {user.firstName}
-              </h2>
-              <h2 className="mt-3 text-lg text-center bg-white rounded-[5px] shadow-xl">
-                {user.questionsAnsweredCorrectly}
-              </h2>
-            </div>
+            ))}
           </div>
         ))}
       </div>
@@ -122,14 +142,9 @@ export default function Earning() {
                 />
                 <h2 className="text-lg text-center ">{user.firstName}</h2>
               </div>
-              <div>
-                <h2 className="px-3 text-lg  rounded-[5px] shadow-xl">
-                  {user.questionsAnsweredCorrectly}
-                </h2>{' '}
-              </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
