@@ -22,7 +22,7 @@ const UtilLayout = () => {
               Sign Up
             </NavLink>
             <NavLink
-              to="/login"
+              to="/"
               className="text-[28.05px] font-normal text-[#30E0A8]"
               style={({ isActive }) => {
                 return {
