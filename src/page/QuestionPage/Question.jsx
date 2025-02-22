@@ -136,7 +136,12 @@ export default function Question() {
               cursor: selectedOption ? 'not-allowed' : 'pointer',
               padding: '10px',
               borderRadius: '5px',
-              border: '2px solid #1A97B3',
+              border:
+                selectedOption === optionKey
+                  ? isCorrect
+                    ? 'none'
+                    : 'none'
+                  : '2px solid #1A97B3',
               backgroundColor:
                 selectedOption === optionKey
                   ? isCorrect
@@ -174,12 +179,17 @@ export default function Question() {
           >
             Next
           </button> */
-          <button
-            className="bg-[#47D1A5] px-6 py-3 rounded-[35px]"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
+          <div className="relative w-full mt-2 cursor-pointer">
+            <div className="z-30   bg-green-Primary_2 rounded-[50px] w-full h-[50px]">
+              {' '}
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="w-full mt-[-55px] bg-green-Primary_1 text-white disabled:opacity-50 rounded-[50px]  h-[50px] flex justify-center items-center font-bold leading-[31.2px] text-[18px]"
+            >
+              Submit
+            </button>
+          </div>
         )}
       </div>
       {isModalVisible && (
