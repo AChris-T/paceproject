@@ -15,7 +15,7 @@ export default function Earning() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
+        <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-emerald-500"></div>
       </div>
     );
   }
@@ -99,30 +99,29 @@ export default function Earning() {
                   index === 0 ? 'h-[130px] ' : 'h-[100px]'
                 }`}
               />
-                <div
-                  className={`rounded-full ${
-                    index === 0 ? 'w-[130px] mt-[-30px]' : 'w-[100px]'
+              <div
+                className={`rounded-full ${
+                  index === 0 ? 'w-[130px] mt-[-30px]' : 'w-[100px]'
+                }`}
+              >
+                <img
+                  src={user.image}
+                  alt=""
+                  className={`object-cover rounded-full z-10 h-[100px] bg-gray-200 ${
+                    index === 0 ? 'h-[130px] ' : 'h-[100px]'
                   }`}
-                >
-                  <img
-                    src={user.image}
-                    alt=""
-                    className={`object-cover rounded-full z-10 h-[100px] bg-gray-200 ${
-                      index === 0 ? 'h-[130px] ' : 'h-[100px]'
-                    }`}
-                  />
-                  <div className="mt-[-20px] ml-[10px] bg-white w-[30px] relative text-green-Primary_1 text-xl z-50 h-[30px] rounded-full items-center justify-center flex">
-                    {index + 1}
-                  </div>
-                  <h2 className="text-lg text-center text-white">
-                    {user.firstName}
-                  </h2>
-                  <h2 className="mt-3 text-lg text-center bg-white rounded-[5px] shadow-xl">
-                    {user.questionsAnsweredCorrectly}
-                  </h2>
+                />
+                <div className="mt-[-20px] ml-[10px] bg-white w-[30px] relative text-green-Primary_1 text-xl z-50 h-[30px] rounded-full items-center justify-center flex">
+                  {index + 1}
                 </div>
+                <h2 className="text-lg text-center text-white">
+                  {user.firstName}
+                </h2>
+                <h2 className="mt-3 text-lg text-center bg-white rounded-[5px] shadow-xl">
+                  {user.questionsAnsweredCorrectly}
+                </h2>
               </div>
-            ))}
+            </div>
           </div>
         ))}
       </div>
@@ -142,9 +141,9 @@ export default function Earning() {
                 />
                 <h2 className="text-lg text-center ">{user.firstName}</h2>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
