@@ -31,7 +31,7 @@ export default function Subject({ onBack, handleSubmit, onNext }) {
 
   const subjects = [
     { name: 'Mathematics', icon: FaCalculator },
-    { name: 'English-Language', icon: FaBook },
+    { name: 'english', icon: FaBook },
     { name: 'Physics', icon: FaAtom },
     { name: 'Chemistry', icon: FaFlask },
     { name: 'Biology', icon: FaLeaf },
