@@ -8,7 +8,7 @@ import { useGetDashboardProfileQuery } from '../../redux/api/Auth';
 import { Navigate, useNavigate } from 'react-router-dom';
 import board from '../../assets/PaceAppLogo/board.png';
 import { ClipLoader } from 'react-spinners';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -38,19 +38,56 @@ export default function Home() {
   const handleClose = () => setOpen(false);
   const [selectedSubject, setSelectedSubject] = useState('');
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Check if navigation should happen after reload
+    if (localStorage.getItem('navigateAfterReload') === 'true') {
+      localStorage.removeItem('navigateAfterReload'); // Clean up
+      navigate('/question', { replace: true }); // Navigate to question page
+    }
+  }, [navigate]);
+
+  const handleNext = () => {
+    if (!selectedSubject) {
+      console.warn('No subject selected');
+      return;
+    }
+
+    localStorage.setItem('subjectSelected', selectedSubject);
+    localStorage.setItem('navigateAfterReload', 'true'); // Set flag for navigation
+    window.location.reload(); // Reload page first
+  };
 
   const handleSelect = (subject) => {
     setSelectedSubject(subject); // Allow only one subject to be selected at a time
   };
 
-  const handleNext = () => {
+  /*  const handleNext = () => {
+    window.location.reload(); // Refresh only after saving progress
     if (selectedSubject) {
       localStorage.setItem('subjectSelected', selectedSubject);
-      navigate('/question');
+      navigate('/question', { replace: true }); // Navigates without reloading
     } else {
       console.log('No subject selected');
     }
   };
+ */
+  /*  const handleNext = () => {
+    if (selectedSubject) {
+      localStorage.setItem('subjectSelected', selectedSubject);
+      navigate('/question', { replace: true });
+    } else {
+      console.warn('No subject selected');
+    }
+
+    setShouldReload(true); // Trigger reload
+  };
+
+  useEffect(() => {
+    if (shouldReload) {
+      window.location.reload();
+    }
+  }, [shouldReload]); */
 
   if (isLoading)
     return (

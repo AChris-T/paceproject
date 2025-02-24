@@ -13,7 +13,24 @@ export default function Question() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [subject, setSubject] = useState(
+    localStorage.getItem('subjectSelected') || ''
+  ); // Track subject state
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const newSubject = localStorage.getItem('subjectSelected');
+      setSubject(newSubject);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const TotalQuestion = data?.data?.data?.length || 0;
   const Subject = localStorage.getItem('subjectSelected');
@@ -182,9 +199,7 @@ export default function Question() {
             Next
           </button> */
           <div className="relative w-full mt-2 cursor-pointer">
-            <div className="z-30   bg-green-Primary_2 rounded-[50px] w-full h-[50px]">
-              {' '}
-            </div>
+            <div className="z-30   bg-green-Primary_2 rounded-[50px] w-full h-[50px]"></div>
             <button
               onClick={handleSubmit}
               className="w-full mt-[-55px] bg-green-Primary_1 text-white disabled:opacity-50 rounded-[50px]  h-[50px] flex justify-center items-center font-bold leading-[31.2px] text-[18px]"

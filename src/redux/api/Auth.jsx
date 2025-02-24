@@ -69,7 +69,7 @@ export const Auth = createApi({
         const subjectSelected = localStorage.getItem('subjectSelected');
         // Retrieve ID from localStorage
         if (!subjectSelected) {
-          throw new Error('ID is not available in localStorage');
+          throw new Error('Subject Not available');
         }
         console.log('newId', subjectSelected);
         return {
