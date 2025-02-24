@@ -144,6 +144,7 @@ export default function Question() {
         Question {currentQuestionIndex + 1} of {TotalQuestion}
       </p>
       <div className="mx-[37px] px-[40px] py-[76px] text-white mt-[-14px] bg-[#167E95] rounded-[10px]">
+        <h1 className="mb-6">{currentQuestion?.section}</h1>
         <h1 className="mb-6">{currentQuestion?.question}</h1>
       </div>
       <div className="space-y-4 mx-[37px] mt-[22px]">
