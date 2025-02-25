@@ -38,7 +38,7 @@ export default function Home() {
   const handleClose = () => setOpen(false);
   const [selectedSubject, setSelectedSubject] = useState('');
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     // Check if navigation should happen after reload
     if (localStorage.getItem('navigateAfterReload') === 'true') {
@@ -104,7 +104,7 @@ export default function Home() {
       <div>
         Error:{' '}
         {error.status === 403 ? (
-          <Navigate to="/auth/login" />
+          <Navigate to="/" />
         ) : (
           'Please check your network'
         )}

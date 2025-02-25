@@ -24,7 +24,7 @@ export default function Earning() {
       <div>
         Error:{' '}
         {error.status === 403 ? (
-          <Navigate to="/auth/login" />
+          <Navigate to="/" />
         ) : (
           'Please check your network'
         )}

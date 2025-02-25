@@ -112,7 +112,7 @@ export default function Question() {
         <h2 className="font-bold text-white text-[24px] mt-5 tracking-wide ">
           The PaceApp
         </h2>
-        <ClipLoader />
+        <ClipLoader className="text-red-400 bg-white" />
       </div>
     );
   if (error)
@@ -120,7 +120,7 @@ export default function Question() {
       <div>
         Error:{' '}
         {error.status === 403 ? (
-          <Navigate to="/login" />
+          <Navigate to="/" />
         ) : (
           'Please check your network'
         )}
@@ -220,7 +220,7 @@ export default function Question() {
         )}
       </div>
       {isModalVisible && (
-        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
+        <div className="fixed top-0 flex right-0 left-0 items-center justify-center mx-auto  max-w-[350px]  h-full z-30">
           <div className="p-8 text-center bg-white rounded-md">
             <h2 className="mb-4 text-lg font-bold">Confirm Action</h2>
             <p className="mb-4">

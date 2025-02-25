@@ -56,7 +56,7 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
+        <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-emerald-500"></div>
       </div>
     );
   }
@@ -64,10 +64,10 @@ export default function Profile() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <p className="text-red-500 text-center mb-4">{error}</p>
+        <p className="mb-4 text-center text-red-500">{error}</p>
         <button
           onClick={() => fetchProfileData()}
-          className="text-emerald-500 underline"
+          className="underline text-emerald-500"
         >
           Try Again
         </button>
@@ -80,11 +80,11 @@ export default function Profile() {
       <div className="border h-[90vh] overflow-y-auto overflow-x-hidden scrollbar-hide">
         {/* Header */}
         <div className="bg-emerald-500">
-          <div className="px-6 pt-8 pb-4 flex justify-between items-center">
-            <h1 className="text-white text-2xl">Profile</h1>
+          <div className="flex items-center justify-between px-6 pt-8 pb-4">
+            <h1 className="text-2xl text-white">Profile</h1>
             <button
               onClick={() => navigate('/app/edit-profile')}
-              className="text-white bg-emerald-400/20 p-2 rounded-full"
+              className="p-2 text-white rounded-full bg-emerald-400/20"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z" />
@@ -94,14 +94,14 @@ export default function Profile() {
 
           {/* Profile Card */}
           <div className="px-6">
-            <div className="pb-6 flex flex-col items-center">
+            <div className="flex flex-col items-center pb-6">
               <div className="relative z-[10]">
                 <div className="absolute bg-[#39C094] w-[180px] z-[1] top-[4px] left-[4px] shadow-sm h-[180px] rounded-[20px]"></div>
                 <div className="relative z-[10] shadow-md w-[180px] bg-white h-[180px] rounded-[20px] overflow-hidden mb-4">
                   <img
                     src={profileData?.image || '/avatar.png'}
                     alt="Profile"
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function Profile() {
         </div>
 
         {/* Stats Section */}
-        <div className="px-6 mt-6 space-y-4 mb-10">
+        <div className="px-6 mt-6 mb-10 space-y-4">
           {/* Points */}
           <div className="flex items-center gap-4  py-2 px-2 rounded-[10px] shadow-sm border">
             <div className="bg-[#F9F9F9] p-3 h-10 w-10 border rounded-full flex items-center justify-center">
@@ -310,7 +310,7 @@ export function EditProfile() {
       toast.error(errorMessage);
 
       if (err.response?.status === 401) {
-        navigate('/login');
+        navigate('/');
       }
     } finally {
       setSubmitting(false);
@@ -320,7 +320,7 @@ export function EditProfile() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
+        <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-emerald-500"></div>
       </div>
     );
   }
@@ -328,10 +328,10 @@ export function EditProfile() {
   // if (error) {
   //   return (
   //     <div className="flex flex-col items-center justify-center h-screen">
-  //       <p className="text-red-500 text-center mb-4">{error}</p>
+  //       <p className="mb-4 text-center text-red-500">{error}</p>
   //       <button
   //         onClick={() => navigate('/app/edit-profile')}
-  //         className="text-emerald-500 underline"
+  //         className="underline text-emerald-500"
   //       >
   //         Try Again
   //       </button>
@@ -355,7 +355,7 @@ export function EditProfile() {
       />
       {/* Header */}
       <div
-        className="flex -ml-1 cursor-pointer borer-b borer-white/30 pb-2 items-center mb-6"
+        className="flex items-center pb-2 mb-6 -ml-1 cursor-pointer borer-b borer-white/30"
         onClick={() => navigate('/app/profile')}
       >
         <button className="text-white">
@@ -373,7 +373,7 @@ export function EditProfile() {
             />
           </svg>
         </button>
-        <h1 className="text-2xl text-white font-medium">Edit Profile</h1>
+        <h1 className="text-2xl font-medium text-white">Edit Profile</h1>
       </div>
 
       {/* Profile Picture */}
@@ -384,10 +384,10 @@ export function EditProfile() {
             <img
               src={formData.image || '/avatar.png'}
               alt="Profile"
-              className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+              className="object-cover w-full h-full transition-opacity group-hover:opacity-80"
             />
             {/* Camera Icon Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-0 flex items-center justify-center transition-opacity opacity-0 bg-black/20 group-hover:opacity-100">
               <svg
                 className="w-8 h-8 text-white"
                 viewBox="0 0 24 24"
@@ -401,10 +401,10 @@ export function EditProfile() {
       </div>
 
       {/* Form */}
-      <form className="space-y-5 pb-6" onSubmit={handleSubmit}>
+      <form className="pb-6 space-y-5" onSubmit={handleSubmit}>
         {/* First Name */}
         <div>
-          <label className="text-white text-sm mb-1 block">First Name*</label>
+          <label className="block mb-1 text-sm text-white">First Name*</label>
           <input
             type="text"
             name="firstName"
@@ -413,7 +413,7 @@ export function EditProfile() {
             className="w-full bg-transparent font-bold border-b border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white"
           />
           {validationErrors.firstName && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.firstName}
             </p>
           )}
@@ -421,7 +421,7 @@ export function EditProfile() {
 
         {/* Last Name */}
         <div>
-          <label className="text-white text-sm mb-1 block">Last Name*</label>
+          <label className="block mb-1 text-sm text-white">Last Name*</label>
           <input
             type="text"
             name="lastName"
@@ -430,7 +430,7 @@ export function EditProfile() {
             className="w-full bg-transparent font-bold border-b border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white"
           />
           {validationErrors.lastName && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.lastName}
             </p>
           )}
@@ -438,7 +438,7 @@ export function EditProfile() {
 
         {/* Phone number */}
         <div>
-          <label className="text-white text-sm mb-1 block">Phone number*</label>
+          <label className="block mb-1 text-sm text-white">Phone number*</label>
           <input
             type="tel"
             name="phoneNumber"
@@ -447,7 +447,7 @@ export function EditProfile() {
             className="w-full bg-transparent font-bold border-b border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white"
           />
           {validationErrors.phoneNumber && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.phoneNumber}
             </p>
           )}
@@ -455,7 +455,7 @@ export function EditProfile() {
 
         {/* Username */}
         <div>
-          <label className="text-white text-sm mb-1 block">Username*</label>
+          <label className="block mb-1 text-sm text-white">Username*</label>
           <input
             type="text"
             name="username"
@@ -464,7 +464,7 @@ export function EditProfile() {
             className="w-full bg-transparent font-bold border-b border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white"
           />
           {validationErrors.username && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.username}
             </p>
           )}
@@ -472,7 +472,7 @@ export function EditProfile() {
 
         {/* Email */}
         <div>
-          <label className="text-white text-sm mb-1 block">E-mail</label>
+          <label className="block mb-1 text-sm text-white">E-mail</label>
           <input
             type="email"
             name="email"
@@ -484,7 +484,7 @@ export function EditProfile() {
 
         {/* Gender */}
         <div>
-          <label className="text-white text-sm mb-1 block">Gender*</label>
+          <label className="block mb-1 text-sm text-white">Gender*</label>
           <div className="relative">
             <select
               name="gender"
@@ -516,7 +516,7 @@ export function EditProfile() {
             </div>
           </div>
           {validationErrors.gender && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.gender}
             </p>
           )}
@@ -524,7 +524,7 @@ export function EditProfile() {
 
         {/* Date of birth */}
         <div>
-          <label className="text-white text-sm mb-1 block">
+          <label className="block mb-1 text-sm text-white">
             Date of birth*
           </label>
           <input
@@ -535,7 +535,7 @@ export function EditProfile() {
             className="w-full bg-transparent border-b font-bold border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white pr-2 [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-100"
           />
           {validationErrors.dateOfBirth && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.dateOfBirth}
             </p>
           )}
@@ -543,7 +543,7 @@ export function EditProfile() {
 
         {/* Level of study */}
         <div>
-          <label className="text-white text-sm mb-1 block">
+          <label className="block mb-1 text-sm text-white">
             Level of study*
           </label>
           <div className="relative">
@@ -553,10 +553,10 @@ export function EditProfile() {
               onChange={handleChange}
               className="w-full font-bold bg-transparent focus:p-2 border-b border-white/30 pb-2 text-[#F9F9F9] focus:outline-none focus:border-white appearance-none"
             >
-              <option value="alevels" className="text-black p-2">
+              <option value="alevels" className="p-2 text-black">
                 A Levels
               </option>
-              <option value="other" className="text-black p-2">
+              <option value="other" className="p-2 text-black">
                 Other
               </option>
             </select>
@@ -577,14 +577,14 @@ export function EditProfile() {
             </div>
           </div>
           {validationErrors.levelOfStudy && (
-            <p className="text-red-300 text-xs mt-1">
+            <p className="mt-1 text-xs text-red-300">
               {validationErrors.levelOfStudy}
             </p>
           )}
         </div>
 
         {/* Save Button */}
-        <div className="pt-4 relative">
+        <div className="relative pt-4">
           <div className="absolute bg-[#1AB381] w-full z-[1] bottom-[-3px] shadow-sm h-[50px] rounded-full"></div>
           <button
             type="submit"
