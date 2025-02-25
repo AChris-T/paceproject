@@ -177,6 +177,15 @@ export default function Question() {
               (isCorrect ? <FaCheck /> : <FaTimes />)}
           </div>
         ))}
+        {selectedOption ? (
+          <div>
+            <h2 className="mt-10 underline">Solution</h2>
+            <p>The correct answer is {currentQuestion?.answer}</p>
+            <p> {currentQuestion?.solution}</p>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
 
       <div className="flex px-[37px] w-full mt-[20px]">
