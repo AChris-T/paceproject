@@ -4,8 +4,11 @@ import { useGetCurrentSubjectQuery } from '../../redux/api/Auth';
 import board from '../../assets/PaceAppLogo/board.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { FaCheck, FaTimes } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-export default function Question() {
+export default function Question({ text }) {
   const { data, error, isLoading } = useGetCurrentSubjectQuery();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -13,6 +16,7 @@ export default function Question() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [loading, setLoading] = useState(false);
   const [subject, setSubject] = useState(
     localStorage.getItem('subjectSelected') || ''
   ); // Track subject state
@@ -92,13 +96,39 @@ export default function Question() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // alert(
     //   `You answered ${correctAnswers} out of ${TotalQuestion} questions correctly.`
     // );
-    localStorage.setItem('correctAnswers', correctAnswers);
-    localStorage.setItem('totalQuestion', TotalQuestion);
-    navigate('/app/result'); // Redirect to the home page
+    setLoading(true);
+    const token = Cookies.get('authToken');
+    if (!token) {
+      setLoading(false);
+      toast.error('Authentication token not found');
+      return;
+    }
+
+    const response = await axios.put(
+      'https://pace-app-backend-v1.onrender.com/api/v1/student/update/correct-answers',
+      {
+        questionsAnsweredCorrectly: correctAnswers,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    if (response.status === 200) {
+      setLoading(false);
+      localStorage.setItem('correctAnswers', correctAnswers);
+      localStorage.setItem('totalQuestion', TotalQuestion);
+      navigate('/app/result'); // Redirect to the home page
+    } else {
+      setLoading(false);
+      toast.error('An error occured');
+    }
   };
   const handleEndClick = () => {
     setModalType('end');
@@ -112,7 +142,8 @@ export default function Question() {
         <h2 className="font-bold text-white text-[24px] mt-5 tracking-wide ">
           The PaceApp
         </h2>
-        <ClipLoader className="text-red-400 bg-white" />
+        <ClipLoader color="white" />
+        <h3 className="text-white">Generating Questions....</h3>
       </div>
     );
   if (error)
@@ -144,8 +175,14 @@ export default function Question() {
         Question {currentQuestionIndex + 1} of {TotalQuestion}
       </p>
       <div className="mx-[37px] px-[40px] py-[76px] text-white mt-[-14px] bg-[#167E95] rounded-[10px]">
-        <h1 className="mb-6">{currentQuestion?.section}</h1>
-        <h1 className="mb-6">{currentQuestion?.question}</h1>
+        <h1
+          className="mb-6"
+          dangerouslySetInnerHTML={{ __html: currentQuestion?.section }}
+        ></h1>
+        <h1
+          className="mb-6"
+          dangerouslySetInnerHTML={{ __html: currentQuestion?.question }}
+        ></h1>
       </div>
       <div className="space-y-4 mx-[37px] mt-[22px]">
         {['a', 'b', 'c', 'd'].map((optionKey) => (
@@ -181,7 +218,9 @@ export default function Question() {
           <div>
             <h2 className="mt-10 underline">Solution</h2>
             <p>The correct answer is {currentQuestion?.answer}</p>
-            <p> {currentQuestion?.solution}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: currentQuestion?.solution }}
+            ></p>
           </div>
         ) : (
           ''
@@ -211,10 +250,11 @@ export default function Question() {
           <div className="relative w-full mt-2 cursor-pointer">
             <div className="z-30   bg-green-Primary_2 rounded-[50px] w-full h-[50px]"></div>
             <button
+              disabled={loading}
               onClick={handleSubmit}
               className="w-full mt-[-55px] bg-green-Primary_1 text-white disabled:opacity-50 rounded-[50px]  h-[50px] flex justify-center items-center font-bold leading-[31.2px] text-[18px]"
             >
-              Submit
+              {loading ? 'Submitting...' : 'Submit'}
             </button>
           </div>
         )}

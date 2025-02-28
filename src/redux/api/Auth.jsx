@@ -84,6 +84,12 @@ export const Auth = createApi({
         method: 'GET',
       }),
     }),
+    questionLeader: builder.mutation({
+      query: () => ({
+        url: 'student/update/correct-answers',
+        method: 'PUT',
+      }),
+    }),
   }),
 });
 
@@ -97,4 +103,5 @@ export const {
   useProilfeCreationMutation,
   useGetDashboardProfileQuery,
   useGetCurrentSubjectQuery,
+  useQuestionLeaderMutation,
 } = Auth;

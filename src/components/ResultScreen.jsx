@@ -2,27 +2,50 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+function getAssessmentMessage(score, total = 10) {
+  console.log('This is the score', score);
+  const percentage = (score / total) * 100;
+
+  if (percentage >= 90) {
+    return { header: 'Brilliant!', message: 'You did exceptionally well!' };
+  } else if (percentage >= 75) {
+    return { header: 'Great Job!', message: "You're on the right track!" };
+  } else if (percentage >= 50) {
+    return { header: 'Good Effort!', message: 'Keep practicing to improve!' };
+  } else if (percentage >= 30) {
+    return { header: 'Keep Going!', message: 'Review and try again!' };
+  } else {
+    return {
+      header: 'Needs Improvement!',
+      message: "Don't give up, practice makes perfect!",
+    };
+  }
+}
+
 export const ResultScreen = ({
   score = localStorage.getItem('correctAnswers'),
   totalQuestions = localStorage.getItem('totalQuestion'),
   coinsEarned = localStorage.getItem('correctAnswers'),
 }) => {
   const navigate = useNavigate();
+  const review = getAssessmentMessage(score);
 
   return (
-    <div className="min-h-screen bg-green-Primary_1 items-center flex flex-col p-6">
+    <div className="flex flex-col items-center min-h-screen p-6 bg-green-Primary_1">
       {/* Title */}
-      <div className="text-left self-start  mb-8">
-        <h1 className="text-white text-3xl font-bold mb-2">Brilliant</h1>
-        <p className="text-white/90 font-semibold text-lg">
-          You did very well!
+      <div className="self-start mb-8 text-left">
+        <h1 className="mb-2 text-3xl font-bold text-white">
+          {review.header || 'Result'}
+        </h1>
+        <p className="text-lg font-semibold text-white/90">
+          {review.message || 'Keep Practicing'}
         </p>
       </div>
 
       {/* Score Display */}
       <div className="relative w-full max-w-[280px] aspect-square mb-8">
-        <div className="absolute inset-0 bg-white/10 rounded-full"></div>
-        <div className="relative z-10 h-full flex items-center justify-center">
+        <div className="absolute inset-0 rounded-full bg-white/10"></div>
+        <div className="relative z-10 flex items-center justify-center h-full">
           {/* Lightning Bolt with Score */}
           <img
             src="/thunder.svg"
@@ -30,7 +53,7 @@ export const ResultScreen = ({
             className="absolute top-0 left-0 w-full h-full"
           />
           <div
-            className="  p-8 h-full w-full flex justify-center relative"
+            className="relative flex justify-center w-full h-full p-8 "
             // style={{
             //   clipPath:
             //     'polygon(67% 0, 65% 36%, 88% 36%, 39% 100%, 44% 54%, 17% 55%)',
@@ -38,11 +61,11 @@ export const ResultScreen = ({
             // }}
           >
             <div className="transform scale-90">
-              <div className="text-green-Primary_1 text-center mt-16">
+              <div className="mt-16 text-center text-green-Primary_1">
                 <span className="text-4xl font-bold">{score}</span>
                 <span className="text-xl font-medium">/{totalQuestions}</span>
               </div>
-              <p className="text-green-Primary_1 font-bold text-sm mt-1">
+              <p className="mt-1 text-sm font-bold text-green-Primary_1">
                 Correct Answers
               </p>
             </div>
@@ -153,9 +176,9 @@ export const ResultScreen = ({
           >
             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
           </svg>
-          <span className="text-white text-sm font-semibold">Coin Earned</span>
+          <span className="text-sm font-semibold text-white">Coin Earned</span>
         </div>
-        <span className="text-white text-xl font-bold">{coinsEarned}</span>
+        <span className="text-xl font-bold text-white">{coinsEarned}</span>
       </div>
 
       {/* Play Again Button */}
