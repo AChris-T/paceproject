@@ -214,17 +214,6 @@ export default function Question({ text }) {
               (isCorrect ? <FaCheck /> : <FaTimes />)}
           </div>
         ))}
-        {selectedOption ? (
-          <div>
-            <h2 className="mt-10 underline">Solution</h2>
-            <p>The correct answer is {currentQuestion?.answer}</p>
-            <p
-              dangerouslySetInnerHTML={{ __html: currentQuestion?.solution }}
-            ></p>
-          </div>
-        ) : (
-          ''
-        )}
       </div>
 
       <div className="flex px-[37px] w-full mt-[20px]">
@@ -259,6 +248,17 @@ export default function Question({ text }) {
           </div>
         )}
       </div>
+      {selectedOption ? (
+        <div>
+          <h2 className="mt-10 underline">Solution</h2>
+          <p>The correct answer is {currentQuestion?.answer}</p>
+          <p
+            dangerouslySetInnerHTML={{ __html: currentQuestion?.solution }}
+          ></p>
+        </div>
+      ) : (
+        ''
+      )}
       {isModalVisible && (
         <div className="fixed top-0 flex right-0 left-0 items-center justify-center mx-auto  max-w-[350px]  h-full z-30">
           <div className="p-8 text-center bg-white rounded-md">
