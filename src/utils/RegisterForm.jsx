@@ -11,11 +11,13 @@ import { useSnackbar } from 'notistack';
 import { useFormik } from 'formik';
 import Cookies from 'js-cookie';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
   const [register, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const [showPassword, setShowPassword] = useState(false);
 
   const phoneRegex = /^(\+?234|0)?[789][01]\d{8}$|^\+[1-9]\d{6,14}$/; // Supports Nigerian and International numbers
 
@@ -118,17 +120,23 @@ const Register = () => {
           >
             Password
           </label>
-
-          <input
-            name="password"
-            type="password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-            className="bg-transparent
-            border-b-[1px] outline-none 
-            font-normal text-[#FFFFFF]"
-          />
+          <div className="relative w-full">
+            <input
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              className="bg-transparent border-b-[1px] outline-none text-[#FFFFFF] w-full pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute text-white transform -translate-y-1/2 right-2 top-1/2"
+            >
+              {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </button>
+          </div>
           {formik.touched.password && formik.errors.password ? (
             <div className="text-[#FF0000] text-end -mt-2 text-[14px] popins font-normal">
               {formik.errors.password}

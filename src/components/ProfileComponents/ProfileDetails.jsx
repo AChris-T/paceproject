@@ -32,11 +32,11 @@ export default function ProfileDetails({ onNext }) {
       const errors = {};
 
       // Validate firstName
-      if (!values.personalDetails.firstName) {
+      if (!values.personalDetails.firstName.trimStart()) {
         errors.firstName = 'First name is required';
       } else if (values.personalDetails.firstName.length < 2) {
         errors.firstName = 'First name must be at least 2 characters';
-      } else if (!/^[A-Za-z]+$/.test(values.personalDetails.firstName)) {
+      } else if (!/^[A-Za-z]+$/.test(values.personalDetails.firstName.trim())) {
         errors.firstName = 'First name must only contain letters';
       }
 
@@ -45,7 +45,7 @@ export default function ProfileDetails({ onNext }) {
         errors.lastName = 'Last name is required';
       } else if (values.personalDetails.lastName.length < 2) {
         errors.lastName = 'Last name must be at least 2 characters';
-      } else if (!/^[A-Za-z]+$/.test(values.personalDetails.lastName)) {
+      } else if (!/^[A-Za-z]+$/.test(values.personalDetails.lastName.trim())) {
         errors.lastName = 'Last name must only contain letters';
       }
 
@@ -63,7 +63,9 @@ export default function ProfileDetails({ onNext }) {
       // Validate gender
       if (!values.personalDetails.gender) {
         errors.gender = 'Gender is required';
-      } else if (!['Male', 'Female'].includes(values.personalDetails.gender)) {
+      } else if (
+        !['Male', 'Female'].includes(values.personalDetails.gender.trim())
+      ) {
         errors.gender = 'Invalid gender selection';
       }
 
@@ -120,7 +122,6 @@ export default function ProfileDetails({ onNext }) {
         const token = Cookies.get('authToken');
         if (!token) {
           console.error('No token found in cookies');
-          alert('Authentication token is missing. Please log in again.');
           return;
         }
 
