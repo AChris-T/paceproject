@@ -249,7 +249,7 @@ export default function Question({ text }) {
         )}
       </div>
       {selectedOption ? (
-        <div>
+        <div className="px-[37px]">
           <h2 className="mt-10 underline">Solution</h2>
           <p>The correct answer is {currentQuestion?.answer}</p>
           <p
