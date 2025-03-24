@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaRegUser } from 'react-icons/fa';
+/* import { FaRegUser } from 'react-icons/fa';
 import { HiOutlineTrophy } from 'react-icons/hi2';
 import { IoMdNotificationsOutline } from 'react-icons/io';
-import { VscHome } from 'react-icons/vsc';
+import { VscHome } from 'react-icons/vsc'; */
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import HomeIcon from '../../components/Icons/HomeIcon';
 import LeaderIcon from '../../components/Icons/LeaderIcon';

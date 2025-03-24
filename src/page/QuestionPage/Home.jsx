@@ -96,7 +96,7 @@ export default function Home() {
         <h2 className="font-bold text-white text-[24px] mt-5 tracking-wide ">
           The PaceApp
         </h2>
-        <ClipLoader />
+        <ClipLoader className="text-white" />
       </div>
     );
   if (error)
@@ -113,7 +113,7 @@ export default function Home() {
   return (
     <div className="px-[17px] py-[43px] flex flex-col h-[88vh] scrollbar-none new   overflow-y-scroll">
       <h3 className="text-[36px] capitalize text-[#16956C] myFont">
-        Hi,  {data?.data?.username}
+        Hi, {data?.data?.username}
       </h3>
       <h3 className="text-[20px]  font-medium text-[#4B4D52]">
         Next Live Quiz

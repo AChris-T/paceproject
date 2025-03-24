@@ -125,10 +125,10 @@ export default function Earning() {
           </div>
         ))}
       </div>
-      <div className="flex flex-col justify-center w-full gap-5 mt-3">
-        {data?.data?.leaderboard.slice(4, 10).map((user, index) => (
-          <div className="flex items-center w-full gap-2"> 
-            <h2 className="text-white">{index + 1}</h2>
+      <div className="flex flex-col justify-center w-full gap-5 mt-3 px-[20px] py-[30px]">
+        {data?.data?.leaderboard.slice(4, 10).map((user, index = 4) => (
+          <div className="flex items-center w-full gap-2">
+            <h2 className="text-white">{index + 4}</h2>
             <div
               key=""
               className="flex justify-between w-full  items-center bg-white rounded-[5px]"
@@ -144,6 +144,26 @@ export default function Earning() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex flex-col justify-center w-full gap-5 mb-4 px-[10px] pr-[10px]">
+        <div className="flex items-center w-full gap-2">
+          <h2 className="text-white">{data?.data?.userPosition?.rank}</h2>
+          <div
+            key=""
+            className="flex justify-between w-full  items-center bg-white rounded-[5px]"
+          >
+            <div className="flex items-center gap-2  px-[21px] w-full h-[40px] ">
+              <img
+                src={data?.data?.userPosition?.image}
+                alt=""
+                className="object-cover rounded-full z-10 w-[30px] h-[30px] bg-gray-200"
+              />
+              <h2 className="text-lg text-center ">
+                {data?.data?.userPosition?.firstName}
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

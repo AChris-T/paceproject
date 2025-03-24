@@ -52,7 +52,7 @@ export default function Question({ text }) {
       event.preventDefault();
       setModalType('reload');
       setIsModalVisible(true);
-      localStorage.clear('subjectSelected');
+      //localStorage.clear('subjectSelected');
 
       return (event.returnValue = '');
     };
@@ -209,7 +209,7 @@ export default function Question({ text }) {
             }}
             className="flex items-center justify-between"
           >
-            <span>{currentQuestion?.option?.[optionKey]}</span>
+            <p>{currentQuestion?.option?.[optionKey]}</p>
             {selectedOption === optionKey &&
               (isCorrect ? <FaCheck /> : <FaTimes />)}
           </div>

@@ -1,14 +1,10 @@
 import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import React, { useState } from 'react';
-import ImageUploader from 'react-image-upload';
 import 'react-image-upload/dist/index.css';
 import { useProilfeCreationMutation } from '../redux/api/Auth';
 import { useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import Cookies from 'js-cookie';
-import { resetForm } from '../redux/FormSlice';
+import { useSelector } from 'react-redux';
 import ProfileDetails from '../components/ProfileComponents/ProfileDetails';
 import Subject from '../components/ProfileComponents/Subject';
 import Department from '../components/ProfileComponents/Department';
@@ -16,7 +12,6 @@ import Department from '../components/ProfileComponents/Department';
 export default function Profile() {
   const [step, setStep] = useState(1);
   const formData = useSelector((state) => state.form);
-  const dispatch = useDispatch();
   const [profileCreation, { isLoading }] = useProilfeCreationMutation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
