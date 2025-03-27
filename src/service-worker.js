@@ -1,7 +1,7 @@
  /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 
-/* Import necessary Workbox modules 
+/* Import necessary Workbox modules */
 import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
@@ -84,4 +84,4 @@ self.addEventListener('fetch', (event) => {
       })
     );
   }
-});*/
+});
